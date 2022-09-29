@@ -70,8 +70,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-<<<<<<< HEAD
 /[Aa]ssets/[Aa]ds/*
-=======
-/[Aa]ds/*
->>>>>>> bd2a95d (fix)
