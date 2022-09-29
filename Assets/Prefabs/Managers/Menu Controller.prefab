@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8938782504056586832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8938782504056586834}
+  - component: {fileID: 8938782504056586835}
+  m_Layer: 0
+  m_Name: Menu Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8938782504056586834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8938782504056586832}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8938782504056586835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8938782504056586832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037b4896a261ace4da36692a6c5ad79d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Cat Attack!
+  skipTutorial: {fileID: 0}
+  spawnLocations:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  catPositon:
+  - {fileID: 2364745090179737325, guid: 43177a8dc59bb13428fb02f061d1dfe5, type: 3}
+  - {fileID: 4015438306732282905, guid: e4ea989083ff7e543b775f120d519b74, type: 3}
+  - {fileID: 6229193183450610979, guid: e8eec884940568d48959bd002d39f35f, type: 3}
+  - {fileID: 6760272577331317869, guid: 516ea096e2a9fd043bb71c53aa583fa4, type: 3}
+  - {fileID: 5522443624069393028, guid: e93b15258a0f1714dbb5eb47ac594de7, type: 3}
+  - {fileID: 4355288838459663723, guid: bd0ec82723ffcef48b83b6c6b539a24b, type: 3}
+  - {fileID: 6662258061205666859, guid: a06e67ab304715845a51f5a92f46ee4c, type: 3}
+  - {fileID: 8314629323833553185, guid: 4ef2a8d987279984aa462ef4a5239a23, type: 3}
+  - {fileID: 2938212215041694, guid: 1715504af118a1e4d8fbe3b95da891d1, type: 3}
+  - {fileID: 5969514641074318251, guid: ff46365015ea9b14886adfbf96a3bfa7, type: 3}
+  - {fileID: 8643908581074931518, guid: 33a24e84ec8f9fd41a75acc1f5327b4d, type: 3}
+  - {fileID: 708888714268427379, guid: d40edc5d76b0a1947b10d65934a6970b, type: 3}
+  - {fileID: 2928153439948323347, guid: 2590d6bf432ac5145a629f0aa9747b0b, type: 3}
+  maxTwitchDelay: 15
+  loadScreen: {fileID: 1814692616532100794, guid: 5139c95baaf6e82478c8620e40921d64, type: 3}

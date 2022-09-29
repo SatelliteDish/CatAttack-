@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &584108584079547594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 584108584079547596}
+  - component: {fileID: 584108584079547597}
+  - component: {fileID: 945426216}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: GameController
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &584108584079547596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584108584079547594}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &584108584079547597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584108584079547594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320215c4124844a44be74bcaf0b8c6c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  situations:
+  - {fileID: 1729884992616194459, guid: 2378d07fe596c2741bc11bd266050144, type: 3}
+  - {fileID: 5000761079933239043, guid: cd05a9e08fbaedc48ba5567eef7d29a2, type: 3}
+  - {fileID: 5305194577401956837, guid: 25de43aebf2557c48965e999807537d8, type: 3}
+  - {fileID: 4480840534065363443, guid: f2fd1bae942a684419820682f934d07c, type: 3}
+  - {fileID: 5119282108188654552, guid: 85cb816e7e7883a4595271a0fa07f5db, type: 3}
+  - {fileID: 8382978415183815828, guid: 8dd949221355bd1479f29b1e2877c75e, type: 3}
+  - {fileID: 4480840534065363443, guid: 309bc177dc19f7247983a91db26edd36, type: 3}
+  - {fileID: 5119282108188654552, guid: 7cb8b874be091244d8b725f86ffe0786, type: 3}
+  - {fileID: 8382978415183815828, guid: b7110dd881713c64cbde19766b3e0d2f, type: 3}
+  boostCount: 2
+  slowSpeed: 10
+  fastSpeed: 2
+  respawnTime: 2
+  gravityMultiplier: 8
+  minGravity: 6
+  odds:
+  - 0
+  - 45
+  - 25
+  - 15
+  - 10
+  - 5
+  pointValue: 0a000000320000006400000096000000f4010000ee020000
+  groundParent: {fileID: 0}
+  scoreText: {fileID: 0}
+  currencyCountText: {fileID: 0}
+  boostIndicator:
+  - {fileID: 3284254187932588774, guid: 7fbe6a517ab75c1458f395c22111e3e8, type: 3}
+  - {fileID: 8774591453042421436, guid: df17384dfe627014b8b7ede7c3434ef1, type: 3}
+  - {fileID: 5496503024959872235, guid: 97b1f8bb5771c0a47b16aca40c15dc2a, type: 3}
+  loadScreen: {fileID: 4360738290725260509, guid: 5139c95baaf6e82478c8620e40921d64, type: 3}
+--- !u!114 &945426216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584108584079547594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 875e235d25bab2647965cbe8ee61412e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accessories:
+  - {fileID: 4301917653974153025, guid: 392b09a8dc9bf574ebd30798097dda50, type: 3}
+  - {fileID: 7561179756704076459, guid: 614c8528887ba1049879bf04b1700868, type: 3}
+  - {fileID: 2184162715379500097, guid: ed9d9d2f87974184bb9a976cbc6f8c34, type: 3}
+  - {fileID: 8391482998232659874, guid: 580d34e017b9c6446814d1bf928d8bd4, type: 3}
+  accesoryIcon:
+  - {fileID: 21300000, guid: e2138fef33b13314c8908513e1d8fe1e, type: 3}
+  - {fileID: 21300000, guid: f39b03cbeec09d946a2c667acf8ff92c, type: 3}
+  - {fileID: 21300000, guid: 3855d8b3ec28ad640bebf48f549c9a95, type: 3}
+  - {fileID: 21300000, guid: 6e7dfdcdac401b441a932688d89e36ad, type: 3}
+  cosmeticsOwned: 00000000010000000200000003000000
+  cosmeticsIndex: 
+  patterns:
+  - {fileID: 2008157518380698524, guid: 4d2d30330fe34ac49ac61c99e86c7d96, type: 3}
+  - {fileID: 5721245590696361846, guid: d49bf5ec079367448ba0a147b91e7e3e, type: 3}
+  patternIcon:
+  - {fileID: 21300000, guid: 5e8c16ebdc7666e4bb1f0a6701aa86e4, type: 3}
+  - {fileID: 21300000, guid: e7dde98a65db42345975baaec817c856, type: 3}
+  patternsOwned: 0000000001000000
+  patternsIndex: 
+  commonAccessories: 
+  rareAccessories: 
+  epicAccessories: 
+  legendaryAccessories: 

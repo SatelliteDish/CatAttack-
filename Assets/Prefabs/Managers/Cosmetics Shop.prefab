@@ -1,0 +1,173 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6843826640418797707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6843826640418797705}
+  - component: {fileID: 6843826640418797706}
+  - component: {fileID: 6843826640418797704}
+  - component: {fileID: 6843826640418797711}
+  m_Layer: 6
+  m_Name: Cosmetics Shop
+  m_TagString: Ground
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6843826640418797705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6843826640418797707}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6843826640418797706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6843826640418797707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6447a295b6a7140afe323534d1401c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &6843826640418797704
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6843826640418797707}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.1983372, y: -1.5696652}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.4184344, y: 0.32501233}
+  m_EdgeRadius: 0
+--- !u!114 &6843826640418797711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6843826640418797707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2803f9bef79c741bbef54edee836b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  price: 010000000200000003000000
+  priceText:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  shopCanvas: {fileID: 3982685821127227780, guid: 775920da45661f54f9b6b654174233e0, type: 3}
+  unlockCanvas: {fileID: 7284397567720345337, guid: f6378f3311a844a48997f95b0aedeba1, type: 3}
+  mainCanvas: {fileID: 8354907095789937619, guid: 08be9088873501649afff98f4479029b, type: 3}
+  prizeCanvas: {fileID: 6865136082270874041, guid: cd7419121571726458d57c4baafc78f0, type: 3}
+  prizeIcon: {fileID: 6676853367313027986, guid: 4740473c9aa118d4f9b385f14aaae06b, type: 3}
+  unlockBoxes:
+  - {fileID: 5726826641403664947, guid: 38c22db14bf1d4d4185f50e9d4faeb2c, type: 3}
+  - {fileID: 8220523494262164497, guid: 1a92a1e7adab3a541afd0bcf911802ef, type: 3}
+  - {fileID: 4861091961530785815, guid: 63a6c823a08d05e439d534982663afcc, type: 3}
+  - {fileID: 8071178924250964961, guid: ad2e11915e1067b4db14921650b2e6d0, type: 3}
+  - {fileID: 198947680696248872, guid: 05fb8e740b6a6b74f851fcb4d26665ea, type: 3}
+  - {fileID: 257004216410542887, guid: 7c4f41c7747447448a602dcc23374187, type: 3}
+  boxColors:
+  - serializedVersion: 2
+    rgba: 4290369871
+  - serializedVersion: 2
+    rgba: 4283547705
+  - serializedVersion: 2
+    rgba: 4279664330
+  - serializedVersion: 2
+    rgba: 4286007001
+  - serializedVersion: 2
+    rgba: 4278247167
+  - serializedVersion: 2
+    rgba: 4292561812
+  rarityColors:
+  - serializedVersion: 2
+    rgba: 4294967295
+  - serializedVersion: 2
+    rgba: 4294795264
+  - serializedVersion: 2
+    rgba: 4291887421
+  - serializedVersion: 2
+    rgba: 4278208767
+  basicRarities:
+  - 61.5
+  - 25
+  - 12.5
+  - 1
+  basicRaritiesText:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  deluxeRarities:
+  - 23
+  - 50
+  - 25
+  - 2
+  deluxeRaritiesText:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  proRarities:
+  - 0
+  - 50
+  - 40
+  - 10
+  proRaritiesText:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cosmeticsCatalogue: {fileID: 945426216, guid: afb664e2e824d024ca58331eea264f9e, type: 3}
+  boxSprite: {fileID: 8520374008814738687, guid: 769ff91abe881af4eabb738a7d04cd2b, type: 3}
+  rarityNames:
+  - Common
+  - Rare
+  - Epic
+  - Legendary
+  commonAccessories: 010000000200000002000000
+  rareAccessories: 030000000200000002000000
+  epicAccessories: 010000000200000002000000
+  legendaryAccessories: 030000000200000002000000
+  commonPatterns: 01000000010000000100000001000000
+  rarePatterns: 00000000000000000000000000000000
+  epicPatterns: 01000000010000000100000001000000
+  legendaryPatterns: 01000000010000000100000001000000
+  cosmeticWon: 0
+  isAccessory: 0
+  cosmeticType: 
+  cosmeticPicker: {fileID: 7153182857957505793, guid: 5c385303fd1278f4ab9cdb95ef406127, type: 3}
