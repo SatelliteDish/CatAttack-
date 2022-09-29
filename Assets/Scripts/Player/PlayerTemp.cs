@@ -125,9 +125,6 @@ public class PlayerTemp<T> : MonoBehaviour, IObservable<T>, IObserver<T>
         states.SetCanMove(false);
         //SStartCoroutine(DestroyRespawnPlatform(platform));
     }
-    //IEnumerator DestroyRespawnPlatform(GameObject platform){ //put in respawn platform
-
-    //}
 
     IEnumerable BoostCooldown(){
         if(config.BoostCount() >= config.BoostLimit()){

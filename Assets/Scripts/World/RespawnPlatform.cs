@@ -1,26 +1,35 @@
+using System;
 using System.Collections;
+using System.Threading;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RespawnPlatform : MonoBehaviour
+public class RespawnPlatform<T> : MonoBehaviour, IObservable
 {
-bool canDropPlayer = false;
-[SerializeField]BoxCollider2D groundDetector;
-[SerializeField]BoxCollider2D hazardDetector;
-void Update(){
-    if(!groundDetector.IsTouchingLayers(LayerMask.GetMask("Ground")) | hazardDetector.IsTouchingLayers(LayerMask.GetMask("Hazard"))){
-        canDropPlayer = false;
+    List<IObserver<T>> observers = new List<IObserver<T>>();
+    [SerializeField]BoxCollider2D groundDetector;
+    [SerializeField]BoxCollider2D hazardDetector;
+    [SerializaField]float platformLifetime = 3;//In Seconds
+
+    void OnEnable() {
+        Thread.Sleep(platformLifetime * 1000);
+        if(!CanDropPlayer()){
+            Thread.Sleep(500);
+            continue;
+        }
+        if(this.enabled) {
+            this.enabled = !this.enabled;
+        }
     }
-    else{
-        canDropPlayer = true;
+
+    bool CanDropPlayer() {
+        if(groundDetector.IsTouchingLayers(LayerMask.GetMask("Ground")) | !hazardDetector.IsTouchingLayers(LayerMask.GetMask("Hazard"))){
+            return true;
+        }
+        return false;
     }
-}
-public void SelfDestruct(){
-    if(canDropPlayer){
-        Destroy(gameObject);
+
+    void IObservable<T>.SubScribe(IObserver<T> observer) {
+            observers.Add(observer);
     }
-    else{
-        Invoke("SelfDestruct", .1f);
-    }
-}
 }
