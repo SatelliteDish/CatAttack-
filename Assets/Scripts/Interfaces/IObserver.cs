@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IObserver<out T>
 {
-    
+    public void ObserverUpdate();
 }

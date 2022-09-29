@@ -1,70 +1,94 @@
-public class PlayerStates {
+using System;
+using System.Collections.Generic;
+public class PlayerStates<T>: IObservable<T> {
+    List<IObserver<T>> observers = new List<IObserver<T>>();
     bool isBoosting = false;
-    bool isInAir = false;
     bool isAlive = true;
     bool canMove = true;
     bool isRespawning = false;
     bool isClothed = false;
     bool hasRespawned = false;
     bool isInTutorial = false;
+    bool isTouchingGround = false;
 
+/*************************************************************/
+/*               GETTERS SETTERS AND OVERLOADS               */
+/*************************************************************/
     public bool IsBoosting() {
         return isBoosting;
     }
     
-    public void SetIsBoosting(bool state) {
+    public void IsBoosting(bool state) {
         isBoosting = state;
     }
-
-    public bool IsInAir() {
-        return isInAir;
-    }
-
-    public void SetIsInAir(bool state) {
-        isInAir = state;
-    }
-
+/*************************************************************/
     public bool IsAlive() {
         return isAlive;
     }
 
-    public void SetIsAlive (bool state) {
+    public void IsAlive (bool state) {
         isAlive = state;
+        UpdateObservers();
     }
-
+/*************************************************************/
     public bool CanMove() {
         return canMove;
     }
 
-    public void SetCanMove (bool state) {
+    public void CanMove (bool state) {
         canMove = state;
     }
+/*************************************************************/
     public bool IsRespawning() {
         return isRespawning;
     }
-    public void SetIsRespawning (bool state) {
+
+    public void IsRespawning (bool state) {
         isRespawning = state;
     }
 
+/*************************************************************/
     public bool IsClothed() {
         return isClothed;
     }
 
-    public void SetIsClothed (bool state) {
+    public void IsClothed (bool state) {
         isClothed = state;
     }
+/*************************************************************/
     public bool HasRespawned() {
         return hasRespawned;
     }
 
-    public void SetHasRespawned (bool state) {
+    public void HasRespawned (bool state) {
         hasRespawned = state;
     }
+/*************************************************************/
     public bool IsInTutorial() {
         return isInTutorial;
     }
-    
-    public void SetIsInTutorial (bool state) {
+
+    public void IsInTutorial (bool state) {
         isInTutorial = state;
+    }
+/*************************************************************/
+    public bool IsTouchingGround() {
+        return isTouchingGround;
+    }
+
+    public void IsTouchingGround(bool val) {
+        isTouchingGround = val;
+    }
+/*************************************************************/
+/*                  IOBSERVABLE METHODS                      */
+/*************************************************************/
+    void IObservable.SubScribe(IObserver<T> observer) {
+        observers.Add(observer);
+    }
+
+    void UpdateObservers() {
+        foreach(auto val in observers) {
+            val.ObserverUpdate();
+        }
     }
 }

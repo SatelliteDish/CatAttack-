@@ -1,3 +1,6 @@
+using System.Threading.Tasks.Dataflow;
+using System.Transactions;
+using System.Numerics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +8,7 @@ using Tutorial;
 using InputManagement;
 using State;
 
-public class PlayerTemp<T> : MonoBehaviour, IObservable<T>, IObserver<T>
+public class PlayerTemp<T> : MonoBehaviour, IObservable<T>
 {
     List<IObserver<T>> observers = new List<IObserver<T>>();
     Rigidbody2D myRB;
@@ -16,9 +19,9 @@ public class PlayerTemp<T> : MonoBehaviour, IObservable<T>, IObserver<T>
     [SerializeField]PlayerConfig<T> config;
     [SerializeField]GameObject afterlife;
     [SerializeField]GameObject respawnPoint;
-    [SerializeField]RespawnPlatform respawnPlatform;
+    [SerializeField]GameObject respawnPlatform;
     [SerializeField]AnimationManager myAnimator;
-    [SerializeField]GroundDetector groundDetector;
+    [SerializeField]BoxCollider2D groundDetector;
     [SerializeField]FaceDetector faceCollider;
     float moveValue; //Done this way for performance
 
@@ -27,14 +30,35 @@ public class PlayerTemp<T> : MonoBehaviour, IObservable<T>, IObserver<T>
     }
 
     void SetReferences(){
+        FindObjectOfType<DependencyManager>().SetPlayer(this);
     }
 
     void Start() {
         GetReferences();    
     }
 
-    void GetReferences() {
+    void OnTriggerEnter2D(Collider2D other) {
+        if(groundDetector.IsTouchingLayers(layerMask.GetMask(GROUND_TAG))) {
+            states.IsTouchingGround(true);
+        }
+        if(faceCollider.IsTouchingLayers(layerMask.GetMask(HAZARD_TAG)) || faceCollider.IsTouchingLayers(layerMask.GetMask(GROUND_TAG))) {
+            Die();
+        }
+    }
 
+    void OnTriggerExit2D(Collider2D other) {
+        if(groundDetector.IsTouchingLayers(layerMask.GetMask(GROUND_TAG))) {
+            states.IsTouchingGround(false);
+        }
+    }
+
+    void GetReferences() {
+        DepedencyManager depMan = FindObjectOfType<DependencyManager>();
+        gameManager = depMan.GetManagersRepo().GetGameManager();
+        speedController = depMan.GetManagersRepo().GetSpeedController();
+        if(states.IsInTutorial()){
+            tutorial = depMan.GetUIRepo().GetTutorialScreen();
+        }  
     }
 
     private void Jump(){
@@ -58,7 +82,7 @@ public class PlayerTemp<T> : MonoBehaviour, IObservable<T>, IObserver<T>
     private void Boost(){
     if(states.IsAlive() && config.BoostCount() > 0){
         StartCoroutine(CancelBoost());    
-        states.SetIsBoosting(true);
+        states.IsBoosting(true);
         myRB.velocity = new Vector2(config.BoostSpeed(), myRB.velocity.y);
         config.UpdateBoostCount(-1);
         gameManager.DisableBoostIndicator(config.BoostCount());
@@ -71,7 +95,7 @@ public class PlayerTemp<T> : MonoBehaviour, IObservable<T>, IObserver<T>
   IEnumerator CancelBoost(){
     FindObjectOfType<AudioManager>().Play("Boost");
     yield return new WaitForSecondsRealtime(config.BoostDuration());
-    states.SetIsBoosting(false);
+    states.IsBoosting(false);
     }
 
     public void ManageInput(InputData input){
@@ -103,27 +127,21 @@ public class PlayerTemp<T> : MonoBehaviour, IObservable<T>, IObserver<T>
         moveValue = val;
     }
     public void Die(){
-        //cameraManager.SwitchToDeadCam(); Should have no access to this, but I need to remember to reimpliment it elsewhere
-        //audioManager.Play("Die");
-        //audioManager.Pause("Music");
-        gameObject.transform.position = afterlife.transform.position;
-        gameManager.ShowEndScreen(true); 
-        states.SetIsAlive(false);
+        transform.position = afterlife.transform.position;
+        states.IsAlive(false);
     }   
     public void Respawn(){
-        //audioManager.Play("Music");
-        states.SetHasRespawned(true);
-        states.SetIsRespawning(true);
-        //gameObject.gameObject.transform.position = respawnPoint.transform.position;
-        //gameManager.ShowEndScreen(false);
-        //cameraManager.SwitchToMainCam();
+        states.HasRespawned(true);
+        states.IsRespawning(true);
+        transform.position = respawnPoint.transform.position;
         if(respawnPlatform != null){
             return;
         }
-        //var platform = Instantiate(respawnPlatform, feetCollider.transform.position, Quaternion.identity);
-        //respawnPlatformScript = FindObjectOfType<RespawnPlatform>();
-        states.SetCanMove(false);
-        //SStartCoroutine(DestroyRespawnPlatform(platform));
+        if(!respawnPlatform.isEnabled) {
+            respawnPlatform.transform.position = new Vector2(TransformBlock.position.x, transform.position.y-1);
+            respawnPlatform.isEnabled = !respawnPlatform.isEnabled;
+        }
+        states.CanMove(false);
     }
 
     IEnumerable BoostCooldown(){

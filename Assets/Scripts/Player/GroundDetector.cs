@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Detector;
 
-public class GroundDetector<T> : MonoBehaviour, IObservable<T>
+public class GroundDetector<T> : MonoBehaviour
 {
     [SerializeField]DetectorType[] type;
     Dictionary<string,bool> detectorTypes = new Dictionary<string, bool>();
