@@ -1,9 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
 [System.Serializable]
-public class PlayerConfig
+public class PlayerConfig<T>: IObservable<T>
 {
+    Dictionary<string,IObservable<T>> observers = new Dictionary<string, IObservable<T>>();
     [Range(15,35)]
     [SerializeField]float jumpHeight = 25f;
     [Range(15,35)]
@@ -17,6 +20,7 @@ public class PlayerConfig
     [SerializeField]float boostDuration = .5f;
     [Range(0,5)]
     [SerializeField]float boostCooldown = 1;
+    float moveValue = 0;
 
     public float JumpHeight() {
         return jumpHeight;
@@ -47,5 +51,12 @@ public class PlayerConfig
 
     public float BoostLimit() {
         return boostLimit;
+    }
+
+    public float GetMoveValue() {
+        return moveValue;
+    }
+
+    void IObservable<T>.SubScribe(IObserver<T> observer) {
     }
 }

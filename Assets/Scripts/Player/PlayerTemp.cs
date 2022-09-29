@@ -5,26 +5,28 @@ using Tutorial;
 using InputManagement;
 using State;
 
-public class PlayerTemp : MonoBehaviour
+public class PlayerTemp<T> : MonoBehaviour, IObservable<T>, IObserver<T>
 {
+    List<IObserver<T>> observers = new List<IObserver<T>>();
     Rigidbody2D myRB;
     GameManager gameManager;
+    SpeedController speedController;
     TutorialScreen tutorial;
     public PlayerStates states;
-    [SerializeField]PlayerConfig config;
+    [SerializeField]PlayerConfig<T> config;
     [SerializeField]GameObject afterlife;
     [SerializeField]GameObject respawnPoint;
     [SerializeField]RespawnPlatform respawnPlatform;
     [SerializeField]AnimationManager myAnimator;
     [SerializeField]GroundDetector groundDetector;
     [SerializeField]FaceDetector faceCollider;
+    float moveValue; //Done this way for performance
 
     void Awake() {
         SetReferences();
     }
 
     void SetReferences(){
-
     }
 
     void Start() {
@@ -45,12 +47,12 @@ public class PlayerTemp : MonoBehaviour
     }
 
     private void FastFall(){
-    if(!groundDetector.IsTouchingGround()){
-        myRB.velocity = new Vector2(myRB.velocity.x, -config.FastFallSpeed());
-        if(states.IsInTutorial()){
-            tutorial.SetCompletion((TutorialStates.FallComplete));
+        if(!groundDetector.IsTouchingGround()){
+            myRB.velocity = new Vector2(myRB.velocity.x, -config.FastFallSpeed());
+            if(states.IsInTutorial()){
+                tutorial.SetCompletion((TutorialStates.FallComplete));
+            }
         }
-    }
     }
 
     private void Boost(){
@@ -87,7 +89,18 @@ public class PlayerTemp : MonoBehaviour
     }
 
     void Update(){
-    
+        if(!states.IsBoosting()){
+            myRB.velocity = new Vector2(moveValue, myRB.velocity.y);
+        }
+        if(speedController.ReturnGroundSpeed().x < 0 && myRB.gravityScale > gameManager.ReturnMinGravity()){
+            myRB.gravityScale = (-speedController.ReturnGroundSpeed().x/speedController.ReturnMinSpeed())* gameManager.ReturnGravityMultiplier();
+        }
+        else{
+            myRB.gravityScale = gameManager.ReturnMinGravity();
+        }
+    }
+    public void SetMoveValue(float val) {
+        moveValue = val;
     }
     public void Die(){
         //cameraManager.SwitchToDeadCam(); Should have no access to this, but I need to remember to reimpliment it elsewhere
@@ -122,5 +135,9 @@ public class PlayerTemp : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(config.BoostCooldown());
         config.UpdateBoostCount(1);
+    }
+
+    void IObservable<T>.SubScribe(IObserver<T> observer) {
+        observers.Add(observer);
     }
 }
