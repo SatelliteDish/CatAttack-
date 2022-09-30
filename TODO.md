@@ -47,6 +47,26 @@
             </ul>
         </li>
         <li>Remove all aspects of my cosmetics system</li>
+        <li>Delete Assets/Data/Config entirely </li>
+        <li>DependencyManager.cs
+            <ul>
+                <li>Either make a Singleton or remove entirely, probably remove entirely;
+            </ul>
+        </li>
+        <li>Delete IState.cs</li>
+        <li>Impliment my interfaces that already exist better</li>
+        <li>CameraManager.cs
+            <ul>
+                <li>Abstract the set follow method to be able to follow any gameObject passed in</li>
+                <li>Create a namespace, so theres no longer the global enum</li>
+            </ul>
+        </li>
+        <li>SpeedController.cs
+            <ul>
+                <li>Take some unnecessary stuff out of Update()</li>
+            </ul>
+        </li>
+        <li>Get rid of unnecessary namespaces</li>
     </ul>
 </div>
 
