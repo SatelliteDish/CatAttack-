@@ -14,7 +14,7 @@ public class OptionsMenu : MonoBehaviour {
     [SerializeField]Image[] bGMPawprints;
     [SerializeField]Image[] bGMTicks;
     [SerializeField]Image[] sFXPawprints;
-    DependencyManager<OptionsMenu> dependencyManager;
+    DependencyManager dependencyManager;
     [SerializeField]TextMeshProUGUI musicVolumeText;
     [SerializeField]TextMeshProUGUI sFXVolumeText;
     float sfxVolume;
@@ -33,7 +33,7 @@ public class OptionsMenu : MonoBehaviour {
         }
     }
     void SetReferences(){
-        dependencyManager = FindObjectOfType<DependencyManager<OptionsMenu>>();
+        dependencyManager = FindObjectOfType<DependencyManager>();
         audioManager = dependencyManager.GetManagersRepo().GetAudioManager();
     }
     void Update(){

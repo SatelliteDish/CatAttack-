@@ -5,8 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using State;
 
-public class GameManager : MonoBehaviour, IObserver<PlayerStates<GameManager>>
-{
+public class GameManager : MonoBehaviour, IObserver<PlayerStates<GameManager>> {
     [Header("Game Settings")]
     public GameObject[] situations;
     [SerializeField]int boostCount = 2;
@@ -30,9 +29,9 @@ public class GameManager : MonoBehaviour, IObserver<PlayerStates<GameManager>>
     StateController stateController;
     LoadIcon loadIcon;
     AudioManager audioManager;
-    DependencyManager<GameManager> dependencyManager;
+    DependencyManager dependencyManager;
     EndScreen endScreen;
-    [SerializeField]Player<GameManager> player;
+    [SerializeField]Player player;
     CosmeticsCatalogue cosmetics;
     CurrencyTracker currencyTracker;
     CameraManager cameraManager;
@@ -55,11 +54,11 @@ public class GameManager : MonoBehaviour, IObserver<PlayerStates<GameManager>>
         DisableBoostAllIndicators();
     }
     void GetReferences(){
-        dependencyManager = FindObjectOfType<DependencyManager<GameManager>>();
-        ManagersRepo<GameManager> managersRepo = dependencyManager.GetManagersRepo();;
+        dependencyManager = FindObjectOfType<DependencyManager>();
+        ManagersRepo managersRepo = dependencyManager.GetManagersRepo();;
         CosmeticsRepo cosmeticsRepo = dependencyManager.GetCosmeticsRepo();;
         UIRepo uIRepo = dependencyManager.GetUIRepo();
-        WorldGenerationRepo<GameManager> worldGenerationRepo = dependencyManager.GetWorldGenerationRepo();
+        WorldGenerationRepo worldGenerationRepo = dependencyManager.GetWorldGenerationRepo();
         if(uIRepo.GetEndScreen() != null){
             endScreen = uIRepo.GetEndScreen();
         }

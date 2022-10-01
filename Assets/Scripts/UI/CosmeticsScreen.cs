@@ -6,7 +6,7 @@ public class CosmeticsScreen : MonoBehaviour
     CosmeticsCatalogue cosmetics;
     ControlManager controlManager;
     StateController stateController;
-    DependencyManager<CosmeticsScreen> dependencyManager;
+    DependencyManager dependencyManager;
     int currentAccessoryShown = 0;
     int currentPatternShown = 0;
     void Awake(){
@@ -15,7 +15,7 @@ public class CosmeticsScreen : MonoBehaviour
     SpawnPlayer();
    }
    void GetReferences(){
-       dependencyManager = FindObjectOfType<DependencyManager<CosmeticsScreen>>();
+       dependencyManager = FindObjectOfType<DependencyManager>();
        cosmetics = dependencyManager.GetCosmeticsRepo().GetCosmeticsCatalogue();
    }
 public void NextCharacter(bool isPattern){

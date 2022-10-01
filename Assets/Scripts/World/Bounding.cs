@@ -8,8 +8,8 @@ public class Bounding : MonoBehaviour
 [SerializeField]BoxCollider2D frontCollider;
 [SerializeField]BoxCollider2D midCollider;
 [SerializeField]BoxCollider2D backCollider;
-Player<Bounding> player;
-DependencyManager<Bounding> dependencyManager;
+Player player;
+DependencyManager dependencyManager;
 StateController stateController;
 GameManager gameManager;
 bool isAhead = false;
@@ -18,7 +18,7 @@ void Start(){
     GetReferences();
 }
 void GetReferences(){
-    dependencyManager = FindObjectOfType<DependencyManager<Bounding>>();
+    dependencyManager = FindObjectOfType<DependencyManager>();
     gameManager = dependencyManager.GetManagersRepo().GetGameManager();
     stateController = dependencyManager.GetManagersRepo().GetStateController();
 }
@@ -28,7 +28,7 @@ private void OnTriggerEnter2D(Collider2D other) {
         return;
     }
     if(other.tag == Constants.PlayerTag) {
-        player = other.GetComponent<Player<Bounding>>();
+        player = other.GetComponent<Player>();
     }
 }
 void Update(){

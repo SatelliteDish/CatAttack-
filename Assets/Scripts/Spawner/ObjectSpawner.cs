@@ -23,9 +23,9 @@ void Start(){
     GetReferences();
 }
 void GetReferences(){
-    DependencyManager<ObjectSpawner> dependencyManager = FindObjectOfType<DependencyManager<ObjectSpawner>>();
-    ManagersRepo<ObjectSpawner> managersRepo = dependencyManager.GetManagersRepo();
-    WorldGenerationRepo<ObjectSpawner> worldGenerationRepo = dependencyManager.GetWorldGenerationRepo();
+    DependencyManager dependencyManager = FindObjectOfType<DependencyManager>();
+    ManagersRepo managersRepo = dependencyManager.GetManagersRepo();
+    WorldGenerationRepo worldGenerationRepo = dependencyManager.GetWorldGenerationRepo();
     gameManager = managersRepo.GetGameManager();
     bgManager = managersRepo.GetBGManager();
     speedController = managersRepo.GetSpeedController();

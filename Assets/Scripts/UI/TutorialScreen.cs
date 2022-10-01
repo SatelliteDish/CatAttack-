@@ -21,7 +21,7 @@ public class TutorialScreen : MonoBehaviour
     [SerializeField]GameObject coin;
     [SerializeField]GameObject[] hazards;
     [SerializeField]Button backToMenu;
-    [SerializeField]Player<TutorialScreen> player;
+    [SerializeField]Player player;
     bool isInPosition = false;
     private void Start(){
         SetBaseState();

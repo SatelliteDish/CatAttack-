@@ -7,15 +7,13 @@ using Tutorial;
 using InputManagement;
 using State;
 
-public class Player<T> : MonoBehaviour, IObservable<T>
-{
-    List<IObserver<T>> observers = new List<IObserver<T>>();
+public class Player : MonoBehaviour {
     Rigidbody2D myRB;
     GameManager gameManager;
     SpeedController speedController;
     TutorialScreen tutorial;
-    public PlayerStates<T> states;
-    public PlayerConfig<T> config;
+    public PlayerStates<Player> states;
+    public PlayerConfig<Player> config;
     [SerializeField]GameObject afterlife;
     [SerializeField]GameObject respawnPoint;
     [SerializeField]GameObject respawnPlatform;
@@ -48,7 +46,7 @@ public class Player<T> : MonoBehaviour, IObservable<T>
     }
 
     void GetReferences() {
-        DependencyManager<Player<T>> depMan = FindObjectOfType<DependencyManager<Player<T>>>();
+        DependencyManager depMan = FindObjectOfType<DependencyManager>();
         gameManager = depMan.GetManagersRepo().GetGameManager();
         speedController = depMan.GetManagersRepo().GetSpeedController();
         if(states.IsInTutorial()){
@@ -145,9 +143,5 @@ public class Player<T> : MonoBehaviour, IObservable<T>
         }
         yield return new WaitForSecondsRealtime(config.BoostCooldown());
         config.UpdateBoostCount(1);
-    }
-
-    void IObservable<T>.SubScribe(IObserver<T> observer) {
-        observers.Add(observer);
     }
 }

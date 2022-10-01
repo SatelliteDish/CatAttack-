@@ -18,7 +18,7 @@ public class SpeedController : MonoBehaviour {
         SetReferences();
     }
     void SetReferences() {
-        ManagersRepo<SpeedController> managersRepo = FindObjectOfType<DependencyManager<SpeedController>>().GetManagersRepo();
+        ManagersRepo managersRepo = FindObjectOfType<DependencyManager>().GetManagersRepo();
         gameManager = managersRepo.GetGameManager();
         stateController = managersRepo.GetStateController();
     }

@@ -15,11 +15,6 @@
 <div id="reffiles" align="left">
     <h3>Files to Refactor</h3>
     <ul>
-        <li>Player.cs
-            <ul>
-                <li>Make it no longer be an observer or observable, keep it on PlayerStates.cs instead</li>
-            </ul>
-        </li>
         <li>AnimationController.cs
             <ul>
                 <li>Can be fully abstracted so it isn't even aware what it's attached to.</li>

@@ -36,7 +36,7 @@ public class ShopManager : MonoBehaviour {
     [SerializeField] int cosmeticWon;
     //[SerializeField]bool isAccessory;
     [SerializeField]string cosmeticType;
-    DependencyManager<ShopManager> dependencyManager;
+    DependencyManager dependencyManager;
     [SerializeField]CosmeticPicker cosmeticPicker;
 
     void Awake(){
@@ -61,7 +61,7 @@ public class ShopManager : MonoBehaviour {
         }
     }
     void GetReferences(){
-        dependencyManager = FindObjectOfType<DependencyManager<ShopManager>>();
+        dependencyManager = FindObjectOfType<DependencyManager>();
         currencyTracker = dependencyManager.GetManagersRepo().GetCurrencyTracker();
     }
     public void OnPurchase(int index){

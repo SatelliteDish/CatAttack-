@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class PatternBar : MonoBehaviour {
     [SerializeField]Image[] iconImages;
     CosmeticsCatalogue catalogue;
-    DependencyManager<PatternBar> dependencyManager;
+    DependencyManager dependencyManager;
     void Start(){
         GetReference();
         UpdatePatternIcons();
     }
     void GetReference(){
-        dependencyManager = FindObjectOfType<DependencyManager<PatternBar>>();
+        dependencyManager = FindObjectOfType<DependencyManager>();
         catalogue = dependencyManager.GetCosmeticsRepo().GetCosmeticsCatalogue();
     }
     public void UpdatePatternIcons(){

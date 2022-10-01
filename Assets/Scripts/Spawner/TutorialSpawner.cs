@@ -15,7 +15,7 @@ void Start(){
     GetReferences();
 }
 void GetReferences(){
-    ManagersRepo<TutorialSpawner> managersRepo = FindObjectOfType<DependencyManager<TutorialSpawner>>().GetManagersRepo();
+    ManagersRepo managersRepo = FindObjectOfType<DependencyManager>().GetManagersRepo();
     gameManager = managersRepo.GetGameManager();
     speedController = managersRepo.GetSpeedController();
     myCollider = GetComponent<BoxCollider2D>();

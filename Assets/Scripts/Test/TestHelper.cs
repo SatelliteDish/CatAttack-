@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestHelper : MonoBehaviour {
     [SerializeField]bool isTest = false;
     void Awake(){
-        FindObjectOfType<DependencyManager<TestHelper>>().SetTestHelper(this);
+        FindObjectOfType<DependencyManager>().SetTestHelper(this);
     }
     public void Log(string message){
         if(isTest){

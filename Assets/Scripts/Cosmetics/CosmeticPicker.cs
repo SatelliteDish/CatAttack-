@@ -5,7 +5,7 @@ using UnityEngine;
 public class CosmeticPicker : MonoBehaviour{
     ShopManager shopManager;
     CosmeticsCatalogue catalogue;
-    DependencyManager<CosmeticPicker> dependencyManager;
+    DependencyManager dependencyManager;
     bool isBasic;
     bool isAccessory;
     int cosmeticWon;
@@ -15,7 +15,7 @@ public class CosmeticPicker : MonoBehaviour{
         GetReferences();
     }
     void GetReferences(){
-        dependencyManager = FindObjectOfType<DependencyManager<CosmeticPicker>>();
+        dependencyManager = FindObjectOfType<DependencyManager>();
         catalogue = dependencyManager.GetCosmeticsRepo().GetCosmeticsCatalogue();
         shopManager = dependencyManager.GetCosmeticsRepo().GetShopManager();
     }

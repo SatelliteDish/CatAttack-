@@ -11,7 +11,7 @@ public class Background : MonoBehaviour
         SetReferences();
     }
     void SetReferences(){
-        ManagersRepo<Background> managersRepo = FindObjectOfType<DependencyManager<Background>>().GetManagersRepo();
+        ManagersRepo managersRepo = FindObjectOfType<DependencyManager>().GetManagersRepo();
         speedController = managersRepo.GetSpeedController();
         myRB = GetComponent<Rigidbody2D>();
     }

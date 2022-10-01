@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class WorldGenerationRepo<T> {
+public class WorldGenerationRepo {
 [SerializeField]Bounding bounding;
 [SerializeField]Deletion deletion;
 [SerializeField]Ground ground;
-[SerializeField]Player<T> player;
-[SerializeField]RespawnPlatform<T> respawnPlatform;
+[SerializeField]Player player;
 [SerializeField]ObjectSpawner targetSpawner;
 [SerializeField]GameObject afterlife;
 [SerializeField]Transform groundParent;
@@ -26,14 +25,14 @@ public GameObject GetAfterlife(){
 public void SetTestHelper(TestHelper helper){
     testHelper = helper;
 }
-public void SetPlayer(Player<T> _player){
+public void SetPlayer(Player _player){
     if(_player == null){
         testHelper.LogError("Error: Reference to Player not found!");
         return;
     }
     player = _player;
 }
-public Player<T> GetPlayer(){
+public Player GetPlayer(){
     if(player == null){
         testHelper.LogError("Error: Player not found!");
         return null;

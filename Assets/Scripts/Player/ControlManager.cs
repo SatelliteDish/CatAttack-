@@ -6,7 +6,7 @@ using State;
 public class ControlManager : MonoBehaviour
 {
 TouchControls touchControls;
-[SerializeField]Player<ControlManager> player;
+[SerializeField]Player player;
 StateController stateController;
 [SerializeField]float touchDeadZone = 300f;
 Vector2 touchStart;
@@ -25,7 +25,7 @@ void Start(){
     touchControls.Touch.TouchPress.canceled += ctx => EndTouch(ctx);
 }
 void GetReferences(){
-    DependencyManager<ControlManager> dependencyManager = FindObjectOfType<DependencyManager<ControlManager>>();
+    DependencyManager dependencyManager = FindObjectOfType<DependencyManager>();
     stateController = dependencyManager.GetManagersRepo().GetStateController();
 }
 void StartTouch(InputAction.CallbackContext context){
