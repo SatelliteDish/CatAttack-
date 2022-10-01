@@ -6,7 +6,7 @@ public class CosmeticPicker : MonoBehaviour
 {
 ShopManager shopManager;
 CosmeticsCatalogue catalogue;
-DependencyManager dependencyManager;
+DependencyManager<T> dependencyManager;
 bool isBasic;
 bool isAccessory;
 int cosmeticWon;
@@ -16,7 +16,7 @@ void Start(){
     GetReferences();
 }
 void GetReferences(){
-    dependencyManager = FindObjectOfType<DependencyManager>();
+    dependencyManager = FindObjectOfType<DependencyManager<T>>();
     catalogue = dependencyManager.GetCosmeticsRepo().GetCosmeticsCatalogue();
     shopManager = dependencyManager.GetCosmeticsRepo().GetShopManager();
 }

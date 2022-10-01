@@ -21,17 +21,11 @@ public class TutorialScreen : MonoBehaviour
     [SerializeField]GameObject coin;
     [SerializeField]GameObject[] hazards;
     [SerializeField]Button backToMenu;
-    Player player;
+    [SerializeField]Player<TutorialScreen> player;
     bool isInPosition = false;
     private void Start(){
-        GetReferences();
         SetBaseState();
     }
-    private void GetReferences(){
-        WorldGenerationRepo worldGenerationRepo = FindObjectOfType<DependencyManager>().GetWorldGenerationRepo();
-        player = worldGenerationRepo.GetPlayer();
-    }
-
     void SetBaseState(){
         leftText.gameObject.SetActive(false);
         rightText.gameObject.SetActive(false);

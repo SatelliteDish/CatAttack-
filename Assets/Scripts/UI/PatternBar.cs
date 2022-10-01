@@ -7,13 +7,13 @@ public class PatternBar : MonoBehaviour
 {
     [SerializeField]Image[] iconImages;
     CosmeticsCatalogue catalogue;
-    DependencyManager dependencyManager;
+    DependencyManager<T> dependencyManager;
 void Start(){
     GetReference();
     UpdatePatternIcons();
 }
 void GetReference(){
-    dependencyManager = FindObjectOfType<DependencyManager>();
+    dependencyManager = FindObjectOfType<DependencyManager<T>>();
     catalogue = dependencyManager.GetCosmeticsRepo().GetCosmeticsCatalogue();
 }
 public void UpdatePatternIcons(){

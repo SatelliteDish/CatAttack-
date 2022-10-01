@@ -15,7 +15,7 @@ AudioManager audioManager;
 [SerializeField]Image[] bGMPawprints;
 [SerializeField]Image[] bGMTicks;
 [SerializeField]Image[] sFXPawprints;
-DependencyManager dependencyManager;
+DependencyManager<T> dependencyManager;
 [SerializeField]TextMeshProUGUI musicVolumeText;
 [SerializeField]TextMeshProUGUI sFXVolumeText;
 float sfxVolume;
@@ -34,7 +34,7 @@ void Awake(){
     }
 }
 void SetReferences(){
-    dependencyManager = FindObjectOfType<DependencyManager>();
+    dependencyManager = FindObjectOfType<DependencyManager<T>>();
     audioManager = dependencyManager.GetManagersRepo().GetAudioManager();
 }
 void Update(){

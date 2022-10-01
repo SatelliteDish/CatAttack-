@@ -8,14 +8,14 @@ public class StartMenu : MonoBehaviour
 {
 [SerializeField]TextMeshProUGUI titleText;
 MenuController menuController;
-DependencyManager dependencyManager;
+DependencyManager<T> dependencyManager;
 void Start(){
     GetReference();
     menuController = FindObjectOfType<MenuController>();
     titleText.text = menuController.ReturnTitle();
 }
 void GetReference(){
-    dependencyManager = FindObjectOfType<DependencyManager>();
+    dependencyManager = FindObjectOfType<DependencyManager<T>>();
     menuController = dependencyManager.GetManagersRepo().GetMenuController();
 }
 }

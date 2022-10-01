@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-Player player;
+Player<AnimationController> player;
 CosmeticsCatalogue catalogue;
 CosmeticsSettings accessory;
-DependencyManager dependencyManager;
+DependencyManager<T><AnimationController> dependencyManager;
 void Start(){
     GetReferences();
     SetRun();
 }
 void GetReferences(){
-    dependencyManager = FindObjectOfType<DependencyManager>();
-    WorldGenerationRepo worldGenerationRepo = dependencyManager.GetWorldGenerationRepo();
-    ManagersRepo managersRepo = dependencyManager.GetManagersRepo();
+    dependencyManager = FindObjectOfType<DependencyManager<T><AnimationController>>();
+    WorldGenerationRepo<AnimationController> worldGenerationRepo = dependencyManager.GetWorldGenerationRepo();
+    ManagersRepo<AnimationController> managersRepo = dependencyManager.GetManagersRepo();
     CosmeticsRepo cosmeticsRepo = dependencyManager.GetCosmeticsRepo();
     catalogue = cosmeticsRepo.GetCosmeticsCatalogue();
     player = worldGenerationRepo.GetPlayer();
-    //accessory = cosmeticsRepo.GetCosmeticsSettings();
 }
 public void SetRun(){
     if(player == null){
@@ -40,6 +39,6 @@ public void SetInAir(bool inAir){
     }
 }
 public void ResetPlayerVariable(){
-        player = FindObjectOfType<DependencyManager>().GetWorldGenerationRepo().GetPlayer();
+        player = FindObjectOfType<DependencyManager<T><AnimationController>>().GetWorldGenerationRepo().GetPlayer();
 }
 }

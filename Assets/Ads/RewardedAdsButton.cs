@@ -8,7 +8,7 @@ public class RewardedAdsButton : MonoBehaviour , IUnityAdsLoadListener, IUnityAd
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     //[SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId;
-    Player player;
+    Player<RewardedAdsButton> player;
  
 
 
@@ -29,7 +29,7 @@ public class RewardedAdsButton : MonoBehaviour , IUnityAdsLoadListener, IUnityAd
     void Start()
     {
         LoadAd();
-        player = FindObjectOfType<Player>();
+        player = FindObjectOfType<Player<RewardedAdsButton>>();
     }
  
     // Load content to the Ad Unit:

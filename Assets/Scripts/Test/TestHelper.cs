@@ -6,7 +6,7 @@ public class TestHelper : MonoBehaviour
 {
 [SerializeField]bool isTest = false;
 void Awake(){
-    FindObjectOfType<DependencyManager>().SetTestHelper(this);
+    FindObjectOfType<DependencyManager<T>>().SetTestHelper(this);
 }
 private void Start() {
     //FindObjectOfType<DependencyManager>().GetManagersRepo().GetStateController().SetState((StateType.isTest, isTest));

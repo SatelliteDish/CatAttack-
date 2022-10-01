@@ -23,8 +23,8 @@ void Start(){
     GetReferences();
 }
 void GetReferences(){
-    DependencyManager dependencyManager = FindObjectOfType<DependencyManager>();
-    ManagersRepo managersRepo = dependencyManager.GetManagersRepo();
+    DependencyManager<T> dependencyManager = FindObjectOfType<DependencyManager<T>>();
+    ManagersRepo<T> managersRepo = dependencyManager.GetManagersRepo();
     WorldGenerationRepo worldGenerationRepo = dependencyManager.GetWorldGenerationRepo();
     gameManager = managersRepo.GetGameManager();
     bgManager = managersRepo.GetBGManager();

@@ -1,15 +1,14 @@
 using UnityEngine;
 using State;
 [System.Serializable]
-public class ManagersRepo
-{
+public class ManagersRepo<T> {
 [SerializeField]GameManager gameManager;
 [SerializeField]BGManager bGManager;
 [SerializeField]AnimationController animationController;
 [SerializeField]ControlManager controlManager;
 [SerializeField]AudioManager audioManager;
 [SerializeField]CameraManager cameraManager;
-[SerializeField]DependencyManager dependencyManager;
+[SerializeField]DependencyManager<T><T> dependencyManager;
 [SerializeField]MenuController menuController;
 [SerializeField]CurrencyTracker currencyTracker;
 [SerializeField]SpeedController speedController;

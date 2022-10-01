@@ -19,7 +19,7 @@ void Start() {
     SetReferences();
 }
 void SetReferences(){
-    ManagersRepo managersRepo = FindObjectOfType<DependencyManager>().GetManagersRepo();
+    ManagersRepo<SpeedController> managersRepo = FindObjectOfType<DependencyManager<SpeedController>>().GetManagersRepo();
     gameManager = managersRepo.GetGameManager();
     stateController = managersRepo.GetStateController();
 }

@@ -26,7 +26,7 @@ void Start(){
     rand = Random.Range(treatMin, treatMax);
 }
 void GetReferences(){
-    ManagersRepo managersRepo = FindObjectOfType<DependencyManager>().GetManagersRepo();
+    ManagersRepo<T> managersRepo = FindObjectOfType<DependencyManager<T>>().GetManagersRepo();
     audioManager = managersRepo.GetAudioManager();
     gameManager = managersRepo.GetGameManager();
     speedController = managersRepo.GetSpeedController();

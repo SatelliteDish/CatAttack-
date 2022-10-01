@@ -4,10 +4,9 @@ using State;
 public class CosmeticsScreen : MonoBehaviour
 {
     CosmeticsCatalogue cosmetics;
-    Player player;
     ControlManager controlManager;
     StateController stateController;
-    DependencyManager dependencyManager;
+    DependencyManager<T> dependencyManager;
     int currentAccessoryShown = 0;
     int currentPatternShown = 0;
     void Awake(){
@@ -16,7 +15,7 @@ public class CosmeticsScreen : MonoBehaviour
     SpawnPlayer();
    }
    void GetReferences(){
-       dependencyManager = FindObjectOfType<DependencyManager>();
+       dependencyManager = FindObjectOfType<DependencyManager<T>>();
        cosmetics = dependencyManager.GetCosmeticsRepo().GetCosmeticsCatalogue();
    }
 public void NextCharacter(bool isPattern){
@@ -27,13 +26,13 @@ public void NextCharacter(bool isPattern){
         }
         if(currentAccessoryShown < cosmetics.cosmeticsOwned.Length - 1 && !spawned){ //if this isn't the last item in the list
             spawned = true;
-            Destroy(player.gameObject);
+            // Destroy(player.gameObject);
             currentAccessoryShown++;     
             PlayerPrefs.SetInt("Current Accessory", currentAccessoryShown);
             SpawnPlayer();
         }
         else{
-            Destroy(player.gameObject);
+            // Destroy(player.gameObject);
             currentAccessoryShown = 0;        
             PlayerPrefs.SetInt("Current Accessory", currentAccessoryShown);
             SpawnPlayer();
@@ -43,13 +42,13 @@ public void NextCharacter(bool isPattern){
         if(cosmetics.patternsOwned.Length == 1){return;} //and you have more than 1 option
         if(currentPatternShown < cosmetics.patternsOwned.Length - 1 && !spawned){//if this isn't the last item in the list
             spawned = true;
-            Destroy(player.gameObject);
+            // Destroy(player.gameObject);
             currentPatternShown++;     
             PlayerPrefs.SetInt("Current Pattern", currentPatternShown);
             SpawnPlayer();
         }
         else{
-            Destroy(player.gameObject);
+            // Destroy(player.gameObject);
             currentPatternShown = 0;        
             PlayerPrefs.SetInt("Current Pattern", currentPatternShown);
             SpawnPlayer();
@@ -64,13 +63,13 @@ public void PreviousCharacter(bool isPattern){
         }
         if(currentAccessoryShown > 0 && !spawned){ //if this isn't the first item in the list
             spawned = true;
-            Destroy(player.gameObject);
+            // Destroy(player.gameObject);
             currentAccessoryShown--;
             PlayerPrefs.SetInt("Current Accessory", currentAccessoryShown);
             SpawnPlayer();
         }
         else{
-            Destroy(player.gameObject);
+            // Destroy(player.gameObject);
             currentAccessoryShown = cosmetics.cosmeticsOwned.Length - 1;   
             PlayerPrefs.SetInt("Current Accessory", currentAccessoryShown);
             SpawnPlayer();
@@ -82,13 +81,13 @@ public void PreviousCharacter(bool isPattern){
         }
         if(currentPatternShown > 0 && !spawned){
             spawned = true;
-            Destroy(player.gameObject);
+            // Destroy(player.gameObject);
             currentPatternShown--;     
             PlayerPrefs.SetInt("Current Pattern", currentPatternShown);
             SpawnPlayer();
         }
         else{
-            Destroy(player.gameObject);
+            // Destroy(player.gameObject);
             currentPatternShown = cosmetics.patternsOwned.Length -1;        
             PlayerPrefs.SetInt("Current Pattern", currentPatternShown);
             SpawnPlayer();
@@ -97,7 +96,6 @@ public void PreviousCharacter(bool isPattern){
 }
 void SpawnPlayer(){
     Instantiate(cosmetics.ReturnOwnedPattern(PlayerPrefs.GetInt("Current Pattern")), new Vector3(0, 0, 0), Quaternion.identity);
-    player = dependencyManager.GetWorldGenerationRepo().GetPlayer();
     stateController.SetState(StateType.canMove, false);
 }
 }

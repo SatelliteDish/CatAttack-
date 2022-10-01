@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using State;
 
-public class GameManager : MonoBehaviour, IObserver
+public class GameManager : MonoBehaviour, IObserver<PlayerStates<GameManager>>
 {
     [Header("Game Settings")]
     public GameObject[] situations;
@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour, IObserver
     [SerializeField]float respawnTime = 2f;
     [SerializeField]float gravityMultiplier = .1f;
     [SerializeField]float minGravity = 4f;
-    //[SerializeField]int minSpeed = 12;
     [Header("Interactables")]
     [SerializeField]float[] odds;
     [SerializeField]int[] pointValue;
@@ -30,10 +29,10 @@ public class GameManager : MonoBehaviour, IObserver
     [SerializeField]GameObject loadScreen;
     StateController stateController;
     LoadIcon loadIcon;
-    AudioManager audio;
-    DependencyManager dependencyManager;
+    AudioManager audioManager;
+    DependencyManager<T> dependencyManager;
     EndScreen endScreen;
-    Player player;
+    [SerializeField]Player<GameManager> player;
     CosmeticsCatalogue cosmetics;
     CurrencyTracker currencyTracker;
     CameraManager cameraManager;
@@ -56,16 +55,15 @@ public class GameManager : MonoBehaviour, IObserver
         DisableBoostAllIndicators();
     }
     void GetReferences(){
-        dependencyManager = FindObjectOfType<DependencyManager>();
-        ManagersRepo managersRepo = dependencyManager.GetManagersRepo();;
+        dependencyManager = FindObjectOfType<DependencyManager<T>>();
+        ManagersRepo<T> managersRepo = dependencyManager.GetManagersRepo();;
         CosmeticsRepo cosmeticsRepo = dependencyManager.GetCosmeticsRepo();;
         UIRepo uIRepo = dependencyManager.GetUIRepo();
         WorldGenerationRepo worldGenerationRepo = dependencyManager.GetWorldGenerationRepo();
         if(uIRepo.GetEndScreen() != null){
             endScreen = uIRepo.GetEndScreen();
         }
-        audio = managersRepo.GetAudioManager();
-        player = worldGenerationRepo.GetPlayer();
+        audioManager = managersRepo.GetAudioManager();
         cosmetics = cosmeticsRepo.GetCosmeticsCatalogue();
         currencyTracker = managersRepo.GetCurrencyTracker();
         cameraManager = managersRepo.GetCameraManager();
@@ -91,7 +89,7 @@ public class GameManager : MonoBehaviour, IObserver
         if(boostIndicator[0] == null | player == null){
             return;
         }
-        for(int i = 0; i < player.ReturnBoostAbility(); i++){
+        for(int i = 0; i < player.config.BoostLimit(); i++){
             boostIndicator[i].gameObject.SetActive(true);
         }
     }
@@ -210,7 +208,7 @@ public class GameManager : MonoBehaviour, IObserver
             ShowEndScreen(false);
         }
     }
-    void Observer.ObserverUpdate() {
+    void IObserver<PlayerStates<GameManager>>.ObserverUpdate() {
         PlayerDeath(!player.states.IsAlive());
     }
 }

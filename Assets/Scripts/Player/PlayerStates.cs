@@ -82,12 +82,12 @@ public class PlayerStates<T>: IObservable<T> {
 /*************************************************************/
 /*                  IOBSERVABLE METHODS                      */
 /*************************************************************/
-    void IObservable.SubScribe(IObserver<T> observer) {
+    void IObservable<T>.SubScribe(IObserver<T> observer) {
         observers.Add(observer);
     }
 
     void UpdateObservers() {
-        foreach(auto val in observers) {
+        foreach(var val in observers) {
             val.ObserverUpdate();
         }
     }

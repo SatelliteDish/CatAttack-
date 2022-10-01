@@ -19,7 +19,7 @@ void Start(){
     spawnerName = "BGSpawner";
 }
 void GetReferences(){
-    ManagersRepo managersRepo = FindObjectOfType<DependencyManager>().GetManagersRepo();
+    ManagersRepo<T> managersRepo = FindObjectOfType<DependencyManager<T>>().GetManagersRepo();
     bgManager = managersRepo.GetBGManager();
     speedController = managersRepo.GetSpeedController();
     spawnerHelper = managersRepo.GetSpawnerHelper();

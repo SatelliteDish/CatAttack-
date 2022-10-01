@@ -8,8 +8,8 @@ public class Bounding : MonoBehaviour
 [SerializeField]BoxCollider2D frontCollider;
 [SerializeField]BoxCollider2D midCollider;
 [SerializeField]BoxCollider2D backCollider;
-Player player;
-DependencyManager dependencyManager;
+Player<Bounding> player;
+DependencyManager<T> dependencyManager;
 StateController stateController;
 GameManager gameManager;
 bool isAhead = false;
@@ -18,10 +18,18 @@ void Start(){
     GetReferences();
 }
 void GetReferences(){
-    dependencyManager = FindObjectOfType<DependencyManager>();
-    player = dependencyManager.GetWorldGenerationRepo().GetPlayer();
+    dependencyManager = FindObjectOfType<DependencyManager<T>>();
     gameManager = dependencyManager.GetManagersRepo().GetGameManager();
     stateController = dependencyManager.GetManagersRepo().GetStateController();
+}
+
+private void OnTriggerEnter2D(Collider2D other) {
+    if(player != null) {
+        return;
+    }
+    if(other.tag == Constants.PlayerTag) {
+        player = other.GetComponent<Player<Bounding>>();
+    }
 }
 void Update(){
     if(stateController.GetState(StateType.isBoosting)){
@@ -32,19 +40,17 @@ void Update(){
 void MaintainPosition(){
     if(frontCollider.IsTouchingLayers(LayerMask.GetMask("Player"))){
         isAhead = true;
-        player.UpdatesSpeedValue(-gameManager.ReturnSlowSpeed());
+        player.SetMoveValue(-gameManager.ReturnSlowSpeed());
     }
     else{
         isAhead = false;
     }
     if(midCollider.IsTouchingLayers(LayerMask.GetMask("Player")) && !isAhead && !isBehind){
-        player.UpdatesSpeedValue(0f);
-        player.StartBoostCooldown();
+        player.SetMoveValue(0f);
     }
     if(backCollider.IsTouchingLayers(LayerMask.GetMask("Player"))){
         isBehind = true;
-        player.UpdatesSpeedValue(gameManager.ReturnFastSpeed());
-        player.StartBoostCooldown();
+        player.SetMoveValue(gameManager.ReturnFastSpeed());
     }
     else{
         isBehind = false;

@@ -37,7 +37,7 @@ public int[] legendaryPatterns;
 [SerializeField] int cosmeticWon;
 //[SerializeField]bool isAccessory;
 [SerializeField]string cosmeticType;
-DependencyManager dependencyManager;
+DependencyManager<T> dependencyManager;
 [SerializeField]CosmeticPicker cosmeticPicker;
 
 void Awake(){
@@ -62,7 +62,7 @@ void Start(){
     }
 }
 void GetReferences(){
-    dependencyManager = FindObjectOfType<DependencyManager>();
+    dependencyManager = FindObjectOfType<DependencyManager<T>>();
     currencyTracker = dependencyManager.GetManagersRepo().GetCurrencyTracker();
 }
 public void OnPurchase(int index){

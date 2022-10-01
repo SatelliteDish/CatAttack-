@@ -28,7 +28,7 @@ void Start(){
     GetReferences();
 }
 void GetReferences(){
-    gameManager = FindObjectOfType<DependencyManager>().GetManagersRepo().GetGameManager();
+    gameManager = FindObjectOfType<DependencyManager<T>>().GetManagersRepo().GetGameManager();
 }
 public void SpawnObject((ObjectType type, Transform parent, ISpawner spawner) newObject){
     //Debug.Log("Spawning " + newObject.type + " from " + newObject.spawner.spawnerName);

@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-public enum CameraType {Main, Dead};
+//TODO: Make this into a namespace
+public enum CameraType {
+    Main,
+    Dead
+};
 public class CameraManager : MonoBehaviour
 {
 [SerializeField]CinemachineVirtualCamera mainCam;
@@ -28,10 +32,10 @@ public void SwitchToDeadCam(){
 }
 public void SetCamFollow(CameraType type){
     if(type == CameraType.Main){
-        mainCam.Follow = FindObjectOfType<Player>().gameObject.transform;
+        mainCam.Follow = FindObjectOfType<ControlManager>().gameObject.transform;
     }
     if(type == CameraType.Dead){
-        deadCam.Follow = FindObjectOfType<Player>().gameObject.transform;
+        deadCam.Follow = FindObjectOfType<ControlManager>().gameObject.transform;
     }
 }
 }
