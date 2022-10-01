@@ -1,33 +1,5 @@
 using UnityEngine;
 using State;
-public class SpeedController : MonoBehaviour
-{
-[SerializeField]float minSpeed;
-[SerializeField]float maxSpeed;
-float groundSpeed;
-float bgSpeed;
-float gameSpeed;
-[Range(0,1)]
-[SerializeField]float bgSpeedPercent;
-[Range(0,1)]
-[SerializeField]float groundSpeedPercent;
-[Range(0,10)]
-[SerializeField]float timeMultiplier;
-GameManager gameManager;
-StateController stateController;
-void Start() {
-    SetReferences();
-}
-void SetReferences(){
-    ManagersRepo<SpeedController> managersRepo = FindObjectOfType<DependencyManager<SpeedController>>().GetManagersRepo();
-    gameManager = managersRepo.GetGameManager();
-    stateController = managersRepo.GetStateController();
-}
-void Update(){
-    if(!stateController.GetState(StateType.isAlive)){
-        Move(0);
-        return;
-    }
 public class SpeedController : MonoBehaviour {
     [SerializeField]float minSpeed;
     [SerializeField]float maxSpeed;
@@ -46,7 +18,7 @@ public class SpeedController : MonoBehaviour {
         SetReferences();
     }
     void SetReferences() {
-        ManagersRepo managersRepo = FindObjectOfType<DependencyManager>().GetManagersRepo();
+        ManagersRepo<SpeedController> managersRepo = FindObjectOfType<DependencyManager<SpeedController>>().GetManagersRepo();
         gameManager = managersRepo.GetGameManager();
         stateController = managersRepo.GetStateController();
     }

@@ -8,7 +8,7 @@ public class ManagersRepo<T> {
 [SerializeField]ControlManager controlManager;
 [SerializeField]AudioManager audioManager;
 [SerializeField]CameraManager cameraManager;
-[SerializeField]DependencyManager<T><T> dependencyManager;
+[SerializeField]DependencyManager<T> dependencyManager;
 [SerializeField]MenuController menuController;
 [SerializeField]CurrencyTracker currencyTracker;
 [SerializeField]SpeedController speedController;

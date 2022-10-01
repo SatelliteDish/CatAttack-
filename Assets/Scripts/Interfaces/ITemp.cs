@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDestructable
+public interface ITemp
 {
-    void Break(GameObject destroyer);
+    void SelfDestruct();
 }

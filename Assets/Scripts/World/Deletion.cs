@@ -13,7 +13,7 @@ void Start(){
     GetReferences();
 }
 void GetReferences(){
-    ManagersRepo<T> managersRepo = FindObjectOfType<DependencyManager<T>>().GetManagersRepo();
+    ManagersRepo<Deletion> managersRepo = FindObjectOfType<DependencyManager<Deletion>>().GetManagersRepo();
     gameManager = managersRepo.GetGameManager();
     speedController = managersRepo.GetSpeedController();
 }

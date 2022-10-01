@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ears : MonoBehaviour
 {
 MenuController menuController;
-DependencyManager<T> dependencyManager;
+DependencyManager<Ears> dependencyManager;
 Animator myAnimator;
 void Start(){
 GetReference();
@@ -14,7 +14,7 @@ myAnimator.SetBool("Right Ear", false);
 StartCoroutine(Twitch());
 }
 void GetReference(){
-    dependencyManager = FindObjectOfType<DependencyManager<T>>();
+    dependencyManager = FindObjectOfType<DependencyManager<Ears>>();
     menuController = dependencyManager.GetManagersRepo().GetMenuController();
     myAnimator = GetComponent<Animator>();
 }

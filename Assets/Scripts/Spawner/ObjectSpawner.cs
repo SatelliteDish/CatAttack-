@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spawner;
 
-public class ObjectSpawner : MonoBehaviour, ISpawner, IDestructable
+public class ObjectSpawner : MonoBehaviour, ISpawner, ITemp
 {   
 
 public string spawnerName {get; set;}
@@ -23,9 +23,9 @@ void Start(){
     GetReferences();
 }
 void GetReferences(){
-    DependencyManager<T> dependencyManager = FindObjectOfType<DependencyManager<T>>();
-    ManagersRepo<T> managersRepo = dependencyManager.GetManagersRepo();
-    WorldGenerationRepo worldGenerationRepo = dependencyManager.GetWorldGenerationRepo();
+    DependencyManager<ObjectSpawner> dependencyManager = FindObjectOfType<DependencyManager<ObjectSpawner>>();
+    ManagersRepo<ObjectSpawner> managersRepo = dependencyManager.GetManagersRepo();
+    WorldGenerationRepo<ObjectSpawner> worldGenerationRepo = dependencyManager.GetWorldGenerationRepo();
     gameManager = managersRepo.GetGameManager();
     bgManager = managersRepo.GetBGManager();
     speedController = managersRepo.GetSpeedController();

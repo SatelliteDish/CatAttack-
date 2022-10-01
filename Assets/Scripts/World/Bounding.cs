@@ -9,7 +9,7 @@ public class Bounding : MonoBehaviour
 [SerializeField]BoxCollider2D midCollider;
 [SerializeField]BoxCollider2D backCollider;
 Player<Bounding> player;
-DependencyManager<T> dependencyManager;
+DependencyManager<Bounding> dependencyManager;
 StateController stateController;
 GameManager gameManager;
 bool isAhead = false;
@@ -18,7 +18,7 @@ void Start(){
     GetReferences();
 }
 void GetReferences(){
-    dependencyManager = FindObjectOfType<DependencyManager<T>>();
+    dependencyManager = FindObjectOfType<DependencyManager<Bounding>>();
     gameManager = dependencyManager.GetManagersRepo().GetGameManager();
     stateController = dependencyManager.GetManagersRepo().GetStateController();
 }

@@ -16,7 +16,7 @@ void Start(){
     }
 }
 void GetReferences(){
-    ManagersRepo<T> managersRepo = FindObjectOfType<DependencyManager<T>>().GetManagersRepo();
+    ManagersRepo<Ground> managersRepo = FindObjectOfType<DependencyManager<Ground>>().GetManagersRepo();
     gameManager = managersRepo.GetGameManager();
     speedController = managersRepo.GetSpeedController();
     if(GetComponent<Rigidbody2D>() != null){

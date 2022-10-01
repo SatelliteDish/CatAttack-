@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour, IObserver<PlayerStates<GameManager>>
     StateController stateController;
     LoadIcon loadIcon;
     AudioManager audioManager;
-    DependencyManager<T> dependencyManager;
+    DependencyManager<GameManager> dependencyManager;
     EndScreen endScreen;
     [SerializeField]Player<GameManager> player;
     CosmeticsCatalogue cosmetics;
@@ -55,11 +55,11 @@ public class GameManager : MonoBehaviour, IObserver<PlayerStates<GameManager>>
         DisableBoostAllIndicators();
     }
     void GetReferences(){
-        dependencyManager = FindObjectOfType<DependencyManager<T>>();
-        ManagersRepo<T> managersRepo = dependencyManager.GetManagersRepo();;
+        dependencyManager = FindObjectOfType<DependencyManager<GameManager>>();
+        ManagersRepo<GameManager> managersRepo = dependencyManager.GetManagersRepo();;
         CosmeticsRepo cosmeticsRepo = dependencyManager.GetCosmeticsRepo();;
         UIRepo uIRepo = dependencyManager.GetUIRepo();
-        WorldGenerationRepo worldGenerationRepo = dependencyManager.GetWorldGenerationRepo();
+        WorldGenerationRepo<GameManager> worldGenerationRepo = dependencyManager.GetWorldGenerationRepo();
         if(uIRepo.GetEndScreen() != null){
             endScreen = uIRepo.GetEndScreen();
         }

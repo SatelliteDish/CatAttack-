@@ -13,7 +13,7 @@ void Start(){
     highscoreText.text = "Game Over!\nHighscore:\n"+ PlayerPrefs.GetInt("Highscore", 0).ToString();
 }
 void GetReferences(){
-    ManagersRepo<T> managersRepo = FindObjectOfType<DependencyManager<T>>().GetManagersRepo();
+    ManagersRepo<EndScreen> managersRepo = FindObjectOfType<DependencyManager<EndScreen>>().GetManagersRepo();
     gameManager = managersRepo.GetGameManager();
     stateController = managersRepo.GetStateController();
 }

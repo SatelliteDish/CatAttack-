@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using State;
 
-public class Treats : MonoBehaviour{
+public class Treats : MonoBehaviour, IDestructable {
 [SerializeField]Rigidbody2D myRigidbody;
 [SerializeField]BoxCollider2D myCollider;
 AudioManager audioManager;
@@ -26,27 +26,27 @@ void Start(){
     rand = Random.Range(treatMin, treatMax);
 }
 void GetReferences(){
-    ManagersRepo<T> managersRepo = FindObjectOfType<DependencyManager<T>>().GetManagersRepo();
+    ManagersRepo<Treats> managersRepo = FindObjectOfType<DependencyManager<Treats>>().GetManagersRepo();
     audioManager = managersRepo.GetAudioManager();
     gameManager = managersRepo.GetGameManager();
     speedController = managersRepo.GetSpeedController();
 }
 private void Update(){
     myRigidbody.velocity = speedController.ReturnGroundSpeed();
-    if(myCollider.IsTouchingLayers(LayerMask.GetMask("Player")) && !isBroken &&!stateController.GetState(StateType.isRespawning)){
-        Break();
+}
+
+    void IDestructable.Break(UnityEngine.GameObject destroyer) {
+        if(isBroken) {
+            return;
+        }
         isBroken = true;
+        audioManager.Play("Break");
+        Destroy(sprite.gameObject);
+        currencyBox.OnButtonPress("down");
+        for(int i = 0; i < rand; i++){
+            Instantiate(treatSprite, gameObject.transform.position, Quaternion.identity);
+        }
     }
-}
-    
-void Break(){
-    audioManager.Play("Break");
-    Destroy(sprite.gameObject);
-    currencyBox.OnButtonPress("down");
-    for(int i = 0; i < rand; i++){
-        Instantiate(treatSprite, gameObject.transform.position, Quaternion.identity);
-    }
-}
 public void UpdateTreatsDestroyed(){
     treatsDestroyed++;
     if(treatsDestroyed == rand){

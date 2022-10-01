@@ -8,7 +8,7 @@ CosmeticsCatalogue cosmetics;
 AnimationController animController;
 
 private void Awake() {
-    cosmetics = FindObjectOfType<DependencyManager<T>>().GetCosmeticsRepo().GetCosmeticsCatalogue();
+    cosmetics = FindObjectOfType<DependencyManager<PlayerSpawner>>().GetCosmeticsRepo().GetCosmeticsCatalogue();
      Instantiate(cosmetics.ReturnOwnedPattern(PlayerPrefs.GetInt("Current Pattern")), new Vector3(0, 0, 0), Quaternion.identity);
 }
 }

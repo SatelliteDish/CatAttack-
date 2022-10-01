@@ -35,6 +35,10 @@ public class Player<T> : MonoBehaviour, IObservable<T>
         if(faceCollider.IsTouchingLayers(LayerMask.GetMask(Constants.HazardTag)) || faceCollider.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))) {
             Die();
         }
+        if(typeof(IDestructable).IsAssignableFrom(other.gameObject.GetType())) {
+            IDestructable destructable = other.gameObject.GetComponent<IDestructable>();
+            destructable.Break(this.gameObject);
+        }
     }
 
     void OnTriggerExit2D(Collider2D other) {

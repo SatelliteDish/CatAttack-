@@ -26,11 +26,6 @@
                 <li>I should fully abstract the animations as well, so they don't need to be accessed by strings in more than 1 place.</li>
             </ul>
         </li>
-        <li>Tweener.cs
-            <ul>
-                <li>Not even implimented. Remove and make a better system.
-            </ul>
-        </li>
         <li>Background.cs
             <ul>
                 <li>Make it an observer to SpeedController, which would allow it to be more abstract.</li>
@@ -41,19 +36,12 @@
                 <li>Maybe just get rid of this altogether? Seems like an IMoving interface or something would work better</li>
             </ul>
         </li>
-        <li>BGSpawner.cs
-            <ul>
-                <li>Just remove altogether, obsolete</li>
-            </ul>
-        </li>
         <li>Remove all aspects of my cosmetics system</li>
-        <li>Delete Assets/Data/Config entirely </li>
         <li>DependencyManager.cs
             <ul>
                 <li>Either make a Singleton or remove entirely, probably remove entirely;
             </ul>
         </li>
-        <li>Delete IState.cs</li>
         <li>Impliment my interfaces that already exist better</li>
         <li>CameraManager.cs
             <ul>

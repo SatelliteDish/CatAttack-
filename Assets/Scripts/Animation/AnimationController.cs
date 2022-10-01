@@ -7,13 +7,13 @@ public class AnimationController : MonoBehaviour
 Player<AnimationController> player;
 CosmeticsCatalogue catalogue;
 CosmeticsSettings accessory;
-DependencyManager<T><AnimationController> dependencyManager;
+DependencyManager<AnimationController> dependencyManager;
 void Start(){
     GetReferences();
     SetRun();
 }
 void GetReferences(){
-    dependencyManager = FindObjectOfType<DependencyManager<T><AnimationController>>();
+    dependencyManager = FindObjectOfType<DependencyManager<AnimationController>>();
     WorldGenerationRepo<AnimationController> worldGenerationRepo = dependencyManager.GetWorldGenerationRepo();
     ManagersRepo<AnimationController> managersRepo = dependencyManager.GetManagersRepo();
     CosmeticsRepo cosmeticsRepo = dependencyManager.GetCosmeticsRepo();
@@ -39,6 +39,6 @@ public void SetInAir(bool inAir){
     }
 }
 public void ResetPlayerVariable(){
-        player = FindObjectOfType<DependencyManager<T><AnimationController>>().GetWorldGenerationRepo().GetPlayer();
+        player = FindObjectOfType<DependencyManager<AnimationController>>().GetWorldGenerationRepo().GetPlayer();
 }
 }

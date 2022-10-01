@@ -21,7 +21,7 @@ void Awake(){
     SetReferences();
 }
 void SetReferences(){
-    FindObjectOfType<DependencyManager<T>>().GetManagersRepo().SetStateController(this);
+    FindObjectOfType<DependencyManager<StateController>>().GetManagersRepo().SetStateController(this);
 }
 public void SetState(StateType type, bool status){
     Debug.Log("State " + type + " changed to " + status);
@@ -32,7 +32,7 @@ public void SetState(StateType type, bool status){
         Debug.Log(type + "added and set as " + status);
         states.Add(type, status);
     }
-    FindObjectOfType<DependencyManager<T>>().GetManagersRepo().GetStateUpdater().UpdateStates(type,status);
+    FindObjectOfType<DependencyManager<StateController>>().GetManagersRepo().GetStateUpdater().UpdateStates(type,status);
 }
 public bool GetState(StateType type){
     if(states.ContainsKey(type)){

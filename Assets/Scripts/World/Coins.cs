@@ -9,7 +9,7 @@ Rigidbody2D myRigidbody;
 GameManager gameManager;
 [SerializeField]int valueIndex;
 AudioManager audioManager;
-DependencyManager<T> dependencyManager;
+DependencyManager<Coins> dependencyManager;
 bool isCollected = false;
 TutorialScreen tutorialScreen;
 SpeedController speedController;
@@ -18,8 +18,8 @@ void Start(){
     GetReferences();
 }
 void GetReferences(){
-    dependencyManager = FindObjectOfType<DependencyManager<T>>();
-    ManagersRepo<T> managersRepo = dependencyManager.GetManagersRepo();
+    dependencyManager = FindObjectOfType<DependencyManager<Coins>>();
+    ManagersRepo<Coins> managersRepo = dependencyManager.GetManagersRepo();
     stateController = managersRepo.GetStateController();
     speedController = managersRepo.GetSpeedController();
     gameManager = managersRepo.GetGameManager();

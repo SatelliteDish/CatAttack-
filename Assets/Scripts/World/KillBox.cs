@@ -6,8 +6,8 @@ public class KillBox : MonoBehaviour
 {
 void OnTriggerEnter2D(Collider2D other) {
 
-    if(typeof(IDestructable).IsAssignableFrom(other.gameObject.GetType())){
-        IDestructable destructable = other.gameObject.GetComponent<IDestructable>();
+    if(typeof(ITemp).IsAssignableFrom(other.gameObject.GetType())){
+        ITemp destructable = other.gameObject.GetComponent<ITemp>();
         destructable.SelfDestruct();
     }
 }

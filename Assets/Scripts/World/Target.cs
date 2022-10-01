@@ -22,7 +22,7 @@ void Start()
     GetReferences();
 }
 void GetReferences(){
-    ManagersRepo<T> managersRepo = FindObjectOfType<DependencyManager<T>>().GetManagersRepo();
+    ManagersRepo<Target> managersRepo = FindObjectOfType<DependencyManager<Target>>().GetManagersRepo();
     gameManager = managersRepo.GetGameManager();
     audioManager = managersRepo.GetAudioManager();
     stateController = managersRepo.GetStateController();

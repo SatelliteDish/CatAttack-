@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class Background : MonoBehaviour
 {
-Rigidbody2D myRB;
-SpeedController speedController;
-[SerializeField]bool isStart = false;
-void Start(){
-    SetReferences();
-}
-void SetReferences(){
-    ManagersRepo<T> managersRepo = FindObjectOfType<DependencyManager<T>>().GetManagersRepo();
-    speedController = managersRepo.GetSpeedController();
-    myRB = GetComponent<Rigidbody2D>();
-}
-void Update(){
-    if(isStart){
-        Move(speedController.ReturnGroundSpeed());
-        return;
+    Rigidbody2D myRB;
+    SpeedController speedController;
+    [SerializeField]bool isStart = false;
+    void Start(){
+        SetReferences();
     }
-    
-    Move(speedController.ReturnBGSpeed());
-}
-void Move(Vector2 speed){
-    myRB.velocity = speed;
-}    
+    void SetReferences(){
+        ManagersRepo<Background> managersRepo = FindObjectOfType<DependencyManager<Background>>().GetManagersRepo();
+        speedController = managersRepo.GetSpeedController();
+        myRB = GetComponent<Rigidbody2D>();
+    }
+    void Update(){
+        if(isStart){
+            Move(speedController.ReturnGroundSpeed());
+            return;
+        }
+
+        Move(speedController.ReturnBGSpeed());
+    }
+    void Move(Vector2 speed){
+        myRB.velocity = speed;
+    }    
 }

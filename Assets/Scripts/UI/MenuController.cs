@@ -18,7 +18,7 @@ OptionsMenu optionsMenu;
 GameManager gameManager;
 [SerializeField]UITweener loadScreen;
 LoadIcon loadIcon;
-DependencyManager<T> dependencyManager;
+DependencyManager<MenuController> dependencyManager;
 void Start(){
     GetReferences();
     ChangeCanvas(CanvasType.StartMenu);
@@ -32,7 +32,7 @@ public string ReturnTitle(){
     return title;
 }
 void GetReferences(){
-    dependencyManager = FindObjectOfType<DependencyManager<T>>();
+    dependencyManager = FindObjectOfType<DependencyManager<MenuController>>();
     startMenu = dependencyManager.GetUIRepo().GetStartMenu();
     optionsMenu = dependencyManager.GetUIRepo().GetOptionsMenu();
     gameManager = dependencyManager.GetManagersRepo().GetGameManager();

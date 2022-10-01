@@ -12,7 +12,7 @@ void Awake() {
     SetReferences();    
 }
 void SetReferences(){
-    FindObjectOfType<DependencyManager<T>>().GetManagersRepo().SetStateUpdater(this);
+    FindObjectOfType<DependencyManager<StateUpdater>>().GetManagersRepo().SetStateUpdater(this);
 }
 public void SetStateRepo((string name, StatesRepo states) newRepo){
     int length = stateRepoNames.Length;
