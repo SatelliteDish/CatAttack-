@@ -62,6 +62,27 @@
         </li>
         <li>Remove FaceDetector.cs and GroundDetector.cs</li>
         <li>Player.cs in progress</li>
+        <li>Assets/Save
+            <ul>
+                <li>Make this more used. I use playerPrefs more than I probably should, and it's mostly because I never really got around to adding it retroactively</li>
+            </ul> 
+        </li>
+        <li>ObjectSpawner.cs
+            <ul>
+                <li>System could use some tuning, though it's okay in an overall sense. Just general cleaning</li>
+            </ul>
+        </li>
+        <li>Delete PlayerSpawner.cs</li>
+        <li>Probably delete TutorialSpawner.cs</li>
+        <li>GameManager.cs
+            <ul>
+                <li>Needs to be broken up and have a lot of unnecessary stuff removed. I'll create an in depth list shortly</li>
+            </ul>
+        </li>
+        <li>StateController.cs and StateUpdater.cs can just be removed. Makes spaghetti code</li>
+        <li>Just add some tests in general, I have put it off too long.</li>
+        <li>Ears can be updated to be a little cleaner, definitely not important though</li>
+        <li>LoadIcon.cs feels more complicated than necessary, and the name is bad. It should be LoadScreen.cs instead.</li>
     </ul>
 </div>
 

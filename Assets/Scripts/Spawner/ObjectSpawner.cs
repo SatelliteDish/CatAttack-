@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spawner;
 
-public class ObjectSpawner : MonoBehaviour, ISpawner, ITemp
-{   
-
+public class ObjectSpawner : MonoBehaviour, ISpawner, ITemp {
 public string spawnerName {get; set;}
 [SerializeField]SpawnerType spawnerType;
 [SerializeField]FurniturePiece furnitureType;
