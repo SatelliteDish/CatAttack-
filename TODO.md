@@ -34,16 +34,22 @@
         </li>
         <li>BGManager.cs
             <ul>
-                <li>🟩🟡Maybe just get rid of this altogether? Seems like an IMoving interface or something would work better</li>
+                <li>🟩🟡Maybe just get rid of this altogether? Seems like an IMoving interface or something would work better
+                <br>Maybe I make an IGround interface(name is WIP) and on start each implimentation reaches out and adds itself to a list contained in SpeedController. In update SpeedController iterates over the list and moves all the objects in the list.</li>
             </ul>
         </li>
         <li>🟨🔴Remove all aspects of my cosmetics system</li>
         <li>DependencyManager.cs
             <ul>
-                <li>🟨🔴Either make a Singleton or remove entirely, probably remove entirely;
+                <li>🟨🔴Burn this spaghetti factory to the ground</li>
             </ul>
         </li>
-        <li>🟩🟡Impliment my interfaces that already exist better</li>
+        <li>🟩🟡Impliment my interfaces that already exist better
+            <ul>
+                <li>IDestructable: Maybe it should be renamed. Should be added to Target.cs, and Coin.cs as well</li>
+                <li>IObservable: Add to SpeedController and maybe more</li>
+            </ul>
+        </li>
         <li>CameraManager.cs
             <ul>
                 <li>🟩🟢Abstract the set follow method to be able to follow any gameObject passed in</li>
@@ -82,7 +88,14 @@
         <li>Probably delete TutorialSpawner.cs</li>
         <li>GameManager.cs
             <ul>
-                <li>🟨🟡Needs to be broken up and have a lot of unnecessary stuff removed. I'll create an in depth list shortly</li>
+                <li>🟨🟡Needs to be broken up and have a lot of unnecessary stuff removed. I'll create an in depth list shortly
+                    <ul>
+                        <li>Remove all methods and variables that don't get referenced</li>
+                        <li>Remove all control it has over UI, break that out</li>
+                        <li>Make a scene navigator, who only deals with scene management.</li>
+                        <li>Break out control of Canvases.</li>
+                    </ul>
+                </li>
             </ul>
         </li>
         <li>🟨🟡StateController.cs and StateUpdater.cs can just be removed. Makes spaghetti code</li>
