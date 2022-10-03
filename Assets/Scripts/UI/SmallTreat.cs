@@ -30,8 +30,7 @@ public class SmallTreat : MonoBehaviour
     {
         if(!canMove){float step = 10 * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, new Vector2(transform.position.x + randx, transform.position.y + randy), step);}
-        if(canMove == true)
-        {
+        if(canMove == true) {
         float step = jar.ReturnSpeed() * Time.deltaTime + sine;
         sine = Time.deltaTime + sine*(55/100);
         transform.position = Vector3.MoveTowards(transform.position, jar.ReturnTransform(), step);
