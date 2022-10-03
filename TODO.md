@@ -50,6 +50,18 @@
             </ul>
         </li>
         <li>Get rid of unnecessary namespaces</li>
+        <li>AnimationManager.cs
+            <ul>
+                <li>Actually impliment this.</li>
+            </ul>
+        </li>
+        <li>ControlManager.cs
+            <ul>
+                <li>Actually understand this. I implimented it before I was really able to understand what I was writing, so I should go back and figure it out so I can maybe improve it.</li>
+            </ul>
+        </li>
+        <li>Remove FaceDetector.cs and GroundDetector.cs</li>
+        <li>Player.cs in progress</li>
     </ul>
 </div>
 
