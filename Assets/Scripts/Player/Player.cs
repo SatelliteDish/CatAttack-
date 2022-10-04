@@ -62,8 +62,8 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private void Boost(){
-    if(!states.IsAlive() && config.BoostCount() < 1 && states.IsBoosting()){
+    private void Boost() {
+    if(!states.IsAlive() && config.BoostCount() < 1 && states.IsBoosting()) {
         return;
     }
         audioManager.Play("Boost");
@@ -82,8 +82,8 @@ public class Player : MonoBehaviour {
         states.IsBoosting(false);
   }
 
-    public void ManageInput(InputData input){
-    switch (input.action){
+    public void ManageInput(InputData input) {
+    switch (input.action) {
         case ActionType.Jump:
             Jump();
             break;
@@ -96,8 +96,15 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void Update(){
-        if(states.IsBoosting() || (transform.position.x < .1 && transform.position.x > -.1)){
+    void Update() {
+        if(speedController.ReturnGroundSpeed().x < 0 && myRB.gravityScale > gameManager.ReturnMinGravity()) {
+            myRB.gravityScale = (-speedController.ReturnGroundSpeed().x/speedController.ReturnMinSpeed())* gameManager.ReturnGravityMultiplier();
+        }
+        else {
+            myRB.gravityScale = gameManager.ReturnMinGravity();
+        }
+        
+        if(states.IsBoosting() || (transform.position.x < .1 && transform.position.x > -.1)) {
             if(transform.position.x < 0 || states.IsBoosting()) {
                 myRB.velocity = new Vector2(config.MoveSpeed(), myRB.velocity.y);
             }
@@ -105,26 +112,20 @@ public class Player : MonoBehaviour {
                 myRB.velocity = new Vector2(-config.MoveSpeed(), myRB.velocity.y);
             }
         }
-        if(speedController.ReturnGroundSpeed().x < 0 && myRB.gravityScale > gameManager.ReturnMinGravity()){
-            myRB.gravityScale = (-speedController.ReturnGroundSpeed().x/speedController.ReturnMinSpeed())* gameManager.ReturnGravityMultiplier();
-        }
-        else{
-            myRB.gravityScale = gameManager.ReturnMinGravity();
-        }
     }
-    public void Die(){
+    public void Die() {
+        states.IsAlive(false);
         gameManager.PlayerDeath(true);
         transform.position = afterlife.transform.position;
-        states.IsAlive(false);
     }   
-    public void Respawn(){
-        gameManager.PlayerDeath(false);
-        states.HasRespawned(true);
-        states.IsRespawning(true);
-        transform.position = respawnPoint.transform.position;
-        if(respawnPlatform != null){
+    public void Respawn() {
+        if(respawnPlatform != null) {
             return;
         }
+        states.HasRespawned(true);
+        states.IsRespawning(true);
+        gameManager.PlayerDeath(false);
+        transform.position = respawnPoint.transform.position;
         if(!respawnPlatform.activeInHierarchy) {
             respawnPlatform.transform.position = new Vector2(transform.position.x, transform.position.y-1);
             respawnPlatform.SetActive(true);
@@ -132,8 +133,8 @@ public class Player : MonoBehaviour {
         states.CanMove(false);
     }
 
-    IEnumerable BoostCooldown(){
-        if(config.BoostCount() >= config.BoostLimit()){
+    IEnumerable BoostCooldown() {
+        if(config.BoostCount() >= config.BoostLimit()) {
             yield break;
         }
         yield return new WaitForSecondsRealtime(config.BoostCooldown());

@@ -4,7 +4,7 @@
     <br>🟥 = High priority - Game will not function properly
     <br>🟨 = Medium Priority - Not SOLID, bad practices, spaghetti code
     <br>🟩 = Low Priority - Unnecessary performance fixes, formatting issues, etc.
-    <br>🔴 = Hard - Requires lots of changes or more complex logic
+    <br>🔴 = Hard - Requires lots of changes or more complex logic. Not necessarily difficult, very annoying counts too
     <br>🟡  = Medium - Generally contained to a few classes, simple logic
     <br>🟢 = Easy - Only effects a couple methods, only bread and butter logic</h5>
 </section>
@@ -23,19 +23,22 @@
     <ul>
         <li>AnimationController.cs
             <ul>
-                <li>🟨🟢Can be fully abstracted so it isn't even aware what it's attached to.</li>
-                <li>🟨🟢I should fully abstract the animations as well, so they don't need to be accessed by strings in more than 1 place.</li>
+                <li>🟨🟢I should fully abstract the animations as well, so they don't need to be accessed by strings in more than 1 place. I could make a wrapper class for each Animation and give it an ID, so I could have some semblance of type safety.</li>
             </ul>
         </li>
         <li>Background.cs
             <ul>
-                <li>🟨🟢Make it an observer to SpeedController, which would allow it to be more abstract.</li>
+                <li>🟨🟢Have a backgroundFactory create the backgrounds, keep track of them in a Queue. When the first element in the queue is null it dequeues, and you can iterate over the queue using foreach to stop or restore each background's speed.</li>
             </ul>
         </li>
         <li>BGManager.cs
             <ul>
-                <li>🟩🟡Maybe just get rid of this altogether? Seems like an IMoving interface or something would work better
-                <br>Maybe I make an IGround interface(name is WIP) and on start each implimentation reaches out and adds itself to a list contained in SpeedController. In update SpeedController iterates over the list and moves all the objects in the list.</li>
+                <li>🟩🟢Turn into BackgroundFactory that my background point talks abouut. I should make an actual background factory to handle the creation logic, and only let it be accessible by BGManager (or whatever I rename it). I'll need a queue, a BackgroundFactory class, and a public BGStart and BGStop function that changes the speed of all BG objects, for when the player dies.</li>
+            </ul>
+        </li>
+        <li>🟦🟡BackgroundFactory.cs: Add a factory for the BackDrops.
+            <ul>
+                <li>Can create a random backdrop, or can create a specific one when passed a request</li>
             </ul>
         </li>
         <li>🟨🔴Remove all aspects of my cosmetics system</li>
@@ -73,7 +76,11 @@
             </ul>
         </li>
         <li>🟩🟢Remove FaceDetector.cs and GroundDetector.cs</li>
-        <li>🟥🔴Player.cs in progress</li>
+        <li>🟥🔴Player.cs in progress
+            <ul>
+                <li></li>
+            </ul>
+        </li>
         <li>Assets/Save
             <ul>
                 <li>🟨🟡Make this more used. I use playerPrefs more than I probably should, and it's mostly because I never really got around to adding it retroactively</li>
