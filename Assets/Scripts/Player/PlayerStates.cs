@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
-public class PlayerStates<T>: IObservable<T> {
-    List<IObserver<T>> observers = new List<IObserver<T>>();
+using UnityEngine;
+
+public class PlayerStates : MonoBehaviour {
+    Player player;
     bool isBoosting = false;
     bool isAlive = true;
     bool canMove = true;
@@ -28,7 +30,6 @@ public class PlayerStates<T>: IObservable<T> {
 
     public void IsAlive (bool state) {
         isAlive = state;
-        UpdateObservers();
     }
 /*************************************************************/
     public bool CanMove() {
@@ -80,15 +81,9 @@ public class PlayerStates<T>: IObservable<T> {
         isTouchingGround = val;
     }
 /*************************************************************/
-/*                  IOBSERVABLE METHODS                      */
 /*************************************************************/
-    void IObservable<T>.SubScribe(IObserver<T> observer) {
-        observers.Add(observer);
-    }
-
-    void UpdateObservers() {
-        foreach(var val in observers) {
-            val.ObserverUpdate();
-        }
+/*************************************************************/
+    private void Start() {
+        player = gameObject.GetComponent<Player>();
     }
 }

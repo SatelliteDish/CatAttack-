@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using State;
 
-public class GameManager : MonoBehaviour, IObserver<PlayerStates<GameManager>> {
+public class GameManager : MonoBehaviour {
     [Header("Game Settings")]
     public GameObject[] situations;
     [SerializeField]int boostCount = 2;
@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour, IObserver<PlayerStates<GameManager>> {
     CurrencyTracker currencyTracker;
     CameraManager cameraManager;
     BGManager bgManager;
-    bool playerIsAlive = true;
     int score = 0;
     void Start(){ 
         FindObjectOfType<AudioManager>().Play("Music");
@@ -187,14 +186,11 @@ public class GameManager : MonoBehaviour, IObserver<PlayerStates<GameManager>> {
      public float ReturnGravityMultiplier(){
         return gravityMultiplier;
     }
-     public int ReturnBoostCount(){
-        return boostCount;
-    }
      public void UpdateCurrencyText(int count){
         if(currencyCountText != null){currencyCountText.text = count.ToString();}
     }
 
-    void PlayerDeath(bool val) {
+    public void PlayerDeath(bool val) {
         if(val == true) {
             cameraManager.SwitchToDeadCam();
             audioManager.Pause("Music");
@@ -206,8 +202,5 @@ public class GameManager : MonoBehaviour, IObserver<PlayerStates<GameManager>> {
             audioManager.Play("Music");
             ShowEndScreen(false);
         }
-    }
-    void IObserver<PlayerStates<GameManager>>.ObserverUpdate() {
-        PlayerDeath(!player.states.IsAlive());
     }
 }

@@ -4,9 +4,8 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class PlayerConfig<T>: IObservable<T>
+public class PlayerConfig
 {
-    Dictionary<string,IObservable<T>> observers = new Dictionary<string, IObservable<T>>();
     [Range(15,35)]
     [SerializeField]float jumpHeight = 25f;
     [Range(15,35)]
@@ -55,8 +54,5 @@ public class PlayerConfig<T>: IObservable<T>
 
     public float GetMoveValue() {
         return moveValue;
-    }
-
-    void IObservable<T>.SubScribe(IObserver<T> observer) {
     }
 }

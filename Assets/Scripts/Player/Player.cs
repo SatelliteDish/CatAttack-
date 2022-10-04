@@ -1,31 +1,28 @@
 using System.Threading;
 using System.Transactions;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Tutorial;
 using InputManagement;
-using State;
 
 public class Player : MonoBehaviour {
     Rigidbody2D myRB;
-    GameManager gameManager;
-    SpeedController speedController;
-    TutorialScreen tutorial;
-    public PlayerStates<Player> states;
-    public PlayerConfig<Player> config;
+    AnimationManager myAnimator;
+    [SerializeField]GameManager gameManager;
+    [SerializeField]SpeedController speedController;
+    [SerializeField]TutorialScreen tutorial;
+    public PlayerStates states;
+    public PlayerConfig config;
     [SerializeField]GameObject afterlife;
     [SerializeField]GameObject respawnPoint;
     [SerializeField]GameObject respawnPlatform;
-    [SerializeField]AnimationManager myAnimator;
     [SerializeField]BoxCollider2D groundDetector;
     [SerializeField]BoxCollider2D faceCollider;
     float moveValue; //Done this way for performance
-
     void Start() {
-        GetReferences();    
+        myRB = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<AnimationManager>();
     }
-
     void OnTriggerEnter2D(Collider2D other) {
         if(groundDetector.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))) {
             states.IsTouchingGround(true);
@@ -43,15 +40,6 @@ public class Player : MonoBehaviour {
         if(groundDetector.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))) {
             states.IsTouchingGround(false);
         }
-    }
-
-    void GetReferences() {
-        DependencyManager depMan = FindObjectOfType<DependencyManager>();
-        gameManager = depMan.GetManagersRepo().GetGameManager();
-        speedController = depMan.GetManagersRepo().GetSpeedController();
-        if(states.IsInTutorial()){
-            tutorial = depMan.GetUIRepo().GetTutorialScreen();
-        }  
     }
 
     private void Jump(){
@@ -120,10 +108,12 @@ public class Player : MonoBehaviour {
         moveValue = val;
     }
     public void Die(){
+        gameManager.PlayerDeath(true);
         transform.position = afterlife.transform.position;
         states.IsAlive(false);
     }   
     public void Respawn(){
+        gameManager.PlayerDeath(false);
         states.HasRespawned(true);
         states.IsRespawning(true);
         transform.position = respawnPoint.transform.position;
