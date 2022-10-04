@@ -35,7 +35,6 @@ public class TutorialScreen : MonoBehaviour
     }
     private void Update() {
         while(!isInPosition){
-            player.gameObject.GetComponent<Rigidbody2D>().velocity += new Vector2(Time.deltaTime /* .5f*/,0);
             if(player.transform.position.x == 0){
                 isInPosition = true;
         }

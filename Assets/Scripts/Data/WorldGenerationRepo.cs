@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
 public class WorldGenerationRepo {
-[SerializeField]Bounding bounding;
 [SerializeField]Deletion deletion;
 [SerializeField]Ground ground;
 [SerializeField]Player player;

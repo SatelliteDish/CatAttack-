@@ -4,8 +4,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class PlayerConfig
-{
+public class PlayerConfig {
     [Range(15,35)]
     [SerializeField]float jumpHeight = 25f;
     [Range(15,35)]
@@ -19,7 +18,9 @@ public class PlayerConfig
     [SerializeField]float boostDuration = .5f;
     [Range(0,5)]
     [SerializeField]float boostCooldown = 1;
-    float moveValue = 0;
+    [Range(0,10)]
+    [SerializeField]float moveSpeed = 5;
+    float originalSpeed = 5;
 
     public float JumpHeight() {
         return jumpHeight;
@@ -32,7 +33,7 @@ public class PlayerConfig
     public int BoostCount() {
         return boostCount;
     }
-    public void UpdateBoostCount(int add) {
+    public void BoostCount(int add) {
         boostCount += add;
     }
 
@@ -51,8 +52,16 @@ public class PlayerConfig
     public float BoostLimit() {
         return boostLimit;
     }
-
-    public float GetMoveValue() {
-        return moveValue;
+    public float MoveSpeed() {
+        return moveSpeed;
+    }
+    public void MoveSpeed(float speed) {
+        moveSpeed = speed;
+    }
+    public float OriginalSpeed() {
+        return originalSpeed;
+    }
+    public void OriginalSpeed(float speed) {
+        originalSpeed = speed;
     }
 }

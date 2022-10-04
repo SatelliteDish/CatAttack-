@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
     [SerializeField]GameManager gameManager;
     [SerializeField]SpeedController speedController;
     [SerializeField]TutorialScreen tutorial;
+    [SerializeField]AudioManager audioManager;
     public PlayerStates states;
     public PlayerConfig config;
     [SerializeField]GameObject afterlife;
@@ -18,10 +19,11 @@ public class Player : MonoBehaviour {
     [SerializeField]GameObject respawnPlatform;
     [SerializeField]BoxCollider2D groundDetector;
     [SerializeField]BoxCollider2D faceCollider;
-    float moveValue; //Done this way for performance
     void Start() {
         myRB = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<AnimationManager>();
+        audioManager = FindObjectOfType<AudioManager>();
+        config.OriginalSpeed(config.MoveSpeed());
     }
     void OnTriggerEnter2D(Collider2D other) {
         if(groundDetector.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))) {
@@ -61,23 +63,24 @@ public class Player : MonoBehaviour {
     }
 
     private void Boost(){
-    if(states.IsAlive() && config.BoostCount() > 0){
-        StartCoroutine(CancelBoost());    
-        states.IsBoosting(true);
-        myRB.velocity = new Vector2(config.BoostSpeed(), myRB.velocity.y);
-        config.UpdateBoostCount(-1);
-        gameManager.DisableBoostIndicator(config.BoostCount());
-        if(states.IsInTutorial()){
-            tutorial.SetCompletion((TutorialStates.BoostComplete));
-            }
-        }
-  }
-
-  IEnumerator CancelBoost(){
-    FindObjectOfType<AudioManager>().Play("Boost");
-    yield return new WaitForSecondsRealtime(config.BoostDuration());
-    states.IsBoosting(false);
+    if(!states.IsAlive() && config.BoostCount() < 1 && states.IsBoosting()){
+        return;
     }
+        audioManager.Play("Boost");
+        states.IsBoosting(true);
+        config.MoveSpeed(config.BoostSpeed());
+        config.BoostCount(-1);
+        gameManager.DisableBoostIndicator(config.BoostCount());
+        if(tutorial != null) {
+            tutorial.SetCompletion(TutorialStates.BoostComplete);
+        }
+        Thread.Sleep((int)(config.BoostDuration() * 1000));
+        config.MoveSpeed(config.OriginalSpeed());
+        //while(transform.position.x > 0) {
+//
+        //}
+        states.IsBoosting(false);
+  }
 
     public void ManageInput(InputData input){
     switch (input.action){
@@ -94,8 +97,13 @@ public class Player : MonoBehaviour {
     }
 
     void Update(){
-        if(!states.IsBoosting()){
-            myRB.velocity = new Vector2(moveValue, myRB.velocity.y);
+        if(states.IsBoosting() || (transform.position.x < .1 && transform.position.x > -.1)){
+            if(transform.position.x < 0 || states.IsBoosting()) {
+                myRB.velocity = new Vector2(config.MoveSpeed(), myRB.velocity.y);
+            }
+            else if(transform.position.x > 0 && !states.IsBoosting()) {
+                myRB.velocity = new Vector2(-config.MoveSpeed(), myRB.velocity.y);
+            }
         }
         if(speedController.ReturnGroundSpeed().x < 0 && myRB.gravityScale > gameManager.ReturnMinGravity()){
             myRB.gravityScale = (-speedController.ReturnGroundSpeed().x/speedController.ReturnMinSpeed())* gameManager.ReturnGravityMultiplier();
@@ -103,9 +111,6 @@ public class Player : MonoBehaviour {
         else{
             myRB.gravityScale = gameManager.ReturnMinGravity();
         }
-    }
-    public void SetMoveValue(float val) {
-        moveValue = val;
     }
     public void Die(){
         gameManager.PlayerDeath(true);
@@ -132,6 +137,6 @@ public class Player : MonoBehaviour {
             yield break;
         }
         yield return new WaitForSecondsRealtime(config.BoostCooldown());
-        config.UpdateBoostCount(1);
+        config.BoostCount(1);
     }
 }
