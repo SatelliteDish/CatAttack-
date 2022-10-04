@@ -78,7 +78,8 @@
         <li>🟩🟢Remove FaceDetector.cs and GroundDetector.cs</li>
         <li>🟥🔴Player.cs in progress
             <ul>
-                <li></li>
+                <li>Create a PlayerFactory, a little overkill right now but when I reimpliment cosmetics it will be a huge help. Can also use to inform the player where they are ie. in tutorial</li>
+                <li>Fix Boost(), might need to break into multiple methods</li>
             </ul>
         </li>
         <li>Assets/Save

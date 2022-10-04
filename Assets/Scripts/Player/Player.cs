@@ -45,32 +45,32 @@ public class Player : MonoBehaviour {
     }
 
     private void Jump(){
-        if(states.IsAlive()){
-            if(groundDetector.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))){
-                myAnimator.IsJumping(true);
-                myRB.velocity = new Vector2 (myRB.velocity.x, config.JumpHeight());
-            }
+        if(!states.IsAlive() || !states.IsTouchingGround()){
+            return;
         }
+        myAnimator.IsJumping(true);
+        myRB.velocity = new Vector2 (myRB.velocity.x, config.JumpHeight());
     }
 
     private void FastFall(){
-        if(!groundDetector.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))){
-            myRB.velocity = new Vector2(myRB.velocity.x, -config.FastFallSpeed());
-            if(states.IsInTutorial()){
-                tutorial.SetCompletion((TutorialStates.FallComplete));
-            }
+        if(states.IsTouchingGround) {
+            return;
+        }
+        myRB.velocity = new Vector2(myRB.velocity.x, -config.FastFallSpeed());
+        if(states.IsInTutorial()){
+            tutorial.SetCompletion((TutorialStates.FallComplete));
         }
     }
 
     private void Boost() {
-    if(!states.IsAlive() && config.BoostCount() < 1 && states.IsBoosting()) {
+    if(!states.IsAlive() || config.BoostCount() < 1 || states.IsBoosting()) {
         return;
     }
-        audioManager.Play("Boost");
         states.IsBoosting(true);
+        audioManager.Play("Boost");
         config.MoveSpeed(config.BoostSpeed());
         config.BoostCount(-1);
-        gameManager.DisableBoostIndicator(config.BoostCount());
+        gameManager.DisableBoostIndicator(config.BoostCount() - 1);
         if(tutorial != null) {
             tutorial.SetCompletion(TutorialStates.BoostComplete);
         }
