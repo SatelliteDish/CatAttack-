@@ -35,18 +35,18 @@ public class Treats : MonoBehaviour, IDestructable {
         myRigidbody.velocity = speedController.ReturnGroundSpeed();
     }
 
-        void IDestructable.Break(UnityEngine.GameObject destroyer) {
-            if(isBroken) {
-                return;
-            }
-            isBroken = true;
-            audioManager.Play("Break");
-            Destroy(sprite.gameObject);
-            currencyBox.OnButtonPress("down");
-            for(int i = 0; i < rand; i++){
-                Instantiate(treatSprite, gameObject.transform.position, Quaternion.identity);
-            }
+    void IDestructable.Break(UnityEngine.GameObject destroyer) {
+        if(isBroken) {
+            return;
         }
+        isBroken = true;
+        audioManager.Play("Break");
+        Destroy(sprite.gameObject);
+        currencyBox.OnButtonPress("down");
+        for(int i = 0; i < rand; i++){
+            Instantiate(treatSprite, gameObject.transform.position, Quaternion.identity);
+        }
+    }
     public void UpdateTreatsDestroyed(){
         treatsDestroyed++;
         if(treatsDestroyed == rand){

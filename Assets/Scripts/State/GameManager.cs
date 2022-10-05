@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour {
     DependencyManager dependencyManager;
     EndScreen endScreen;
     [SerializeField]Player player;
-    CosmeticsCatalogue cosmetics;
     CurrencyTracker currencyTracker;
     CameraManager cameraManager;
     BGManager bgManager;
@@ -63,7 +62,6 @@ public class GameManager : MonoBehaviour {
             endScreen = uIRepo.GetEndScreen();
         }
         audioManager = managersRepo.GetAudioManager();
-        cosmetics = cosmeticsRepo.GetCosmeticsCatalogue();
         currencyTracker = managersRepo.GetCurrencyTracker();
         cameraManager = managersRepo.GetCameraManager();
         bgManager = managersRepo.GetBGManager();
@@ -150,11 +148,10 @@ public class GameManager : MonoBehaviour {
         }
     }
     public void SaveData(){
-        SaveSystem.SavePlayer(cosmetics);
+
     }
     public void LoadData(){
-        SaveData data = SaveSystem.LoadCosmeticData();
-        cosmetics.cosmeticsOwned = data.cosmeticsOwned;
+
     }
     public float ReturnOdds(int index){
         return odds[index];

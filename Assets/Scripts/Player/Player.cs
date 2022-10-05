@@ -67,6 +67,7 @@ public class Player : MonoBehaviour {
         if(!states.IsAlive() || config.BoostCount() < 1 || states.IsBoosting()) {
             return;
         }
+        try {
             states.IsBoosting(true);
             audioManager.Play("Boost");
             Debug.Log("Boost Speed = " + config.BoostSpeed());
@@ -74,6 +75,10 @@ public class Player : MonoBehaviour {
             config.BoostCount(-1);
             gameManager.DisableBoostIndicator(config.BoostCount());
             StartCoroutine(EndBoost());
+        }
+        catch(ArgumentException error) {
+            Debug.LogError(error.Message);
+        }
     }
     IEnumerator EndBoost() {
         yield return new WaitForSecondsRealtime(config.BoostCooldown());

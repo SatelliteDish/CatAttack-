@@ -75,6 +75,11 @@
                 <li>🟨🟡Make this more used. I use playerPrefs more than I probably should, and it's mostly because I never really got around to adding it retroactively</li>
             </ul> 
         </li>
+        <li>AudioManager.cs
+            <ul>
+                <li>Break start into some other file that fits it better</li>
+            </ul>
+        </li>
         <li>ObjectSpawner.cs
             <ul>
                 <li>🟩🟡System could use some tuning, though it's okay in an overall sense. Just general cleaning</li>
@@ -117,6 +122,7 @@
         <li>🟩🟢Treats.cs is needlessly complicated, just simplify it</li>
         <li>🟦🟢Make an exceptions folder, where I can write custom exceptions.</li>
         <li>CameraManager.cs put the start function somewhere else</li>
+        <li>I can probably remove the seperation between classes like Background.cs and Ground.cs if I add a generic factory for both. All you'd need is to send a request that has a bool called isBackground or something.</li>
     </ul>
 </section>
 

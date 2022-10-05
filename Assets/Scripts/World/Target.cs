@@ -2,41 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Target : MonoBehaviour {
+public class Target : MonoBehaviour, IDestructable {
     Rigidbody2D myRigidbody;
     BoxCollider2D myCollider;
     GameManager gameManager;
     AudioManager audioManager;
-    SpeedController speedController;
-    StateController stateController;
+    Vector2 speed = new Vector2(0,0);
+    Vector2 defaultSpeed = new Vector2(0,0);
     bool isBroken = false;
     [SerializeField]int valueIndex;
     [SerializeField]float destroyTime = 1f;
     [SerializeField]ParticleSystem destroyEffect;
     [SerializeField]ParticleSystem nameAndPoint;
     [SerializeField]GameObject sprite;
-    void Start()
-    {
-        Debug.Log("Spawned " + this.transform.position);
+    void Start() {
         GetReferences();
     }
-    void GetReferences(){
+    void GetReferences() {
         ManagersRepo managersRepo = FindObjectOfType<DependencyManager>().GetManagersRepo();
         gameManager = managersRepo.GetGameManager();
         audioManager = managersRepo.GetAudioManager();
-        stateController = managersRepo.GetStateController();
-        speedController = managersRepo.GetSpeedController();
         myRigidbody = GetComponent<Rigidbody2D>();
         myCollider = GetComponent<BoxCollider2D>();
     }
-    void Update(){
-        if(myCollider == null | myRigidbody == null){
-            Debug.LogError("Collider or Rigidbody on Target not found!");
-            return;
-        }
-        myRigidbody.velocity = speedController.ReturnGroundSpeed();
+    void Update() {
+        myRigidbody.velocity = speed;
     }
-    public void Break() {
+    public void Speed(Vector2 val) {
+        if(speed == new Vector2(0,0)) {
+            defaultSpeed = val;
+        }
+        speed = val;
+    }
+
+    public void IDestructable.Break() {
         if(isBroken){
             return;
         }

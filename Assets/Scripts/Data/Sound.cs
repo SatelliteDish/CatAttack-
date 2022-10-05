@@ -1,17 +1,28 @@
 using UnityEngine.Audio;
 using UnityEngine;
 [System.Serializable]
-public class Sound
-{
-    public string name;
-    public AudioClip clip;
+public class Sound {
+    [SerializeField] string name;
+    [SerializeField] AudioClip clip;
     [Range(0f, 10f)]
-    public float volume;
+    [SerializeField] float volume;
     [Range(.1f, 3f)]
-    public float pitch;
-    public bool loop;
-    public bool isSFX;
-    public bool isBGM;
+    [SerializeField] float pitch;
+    [SerializeField] bool loop;
+    [SerializeField] bool isSFX;
+    [SerializeField] bool isBGM;
     [HideInInspector]
-    public AudioSource source;
+    [SerializeField] AudioSource source;
+    public string Name() {
+        return name;
+    }
+    public AudioClip Clip() {
+        return clip;
+    }
+    public float Volume() {
+        return volume;
+    }
+    public float Pitch() {
+        return pitch;
+    }
 }
