@@ -1,5 +1,5 @@
 /*****************************************************************************\
-|This class wraps a Cinemachine Virtual Camera                                |
+|This class wraps a Cinemachine Camera                                        |
 |TODO: Change the name, Camera was taken (unsurprisingly) and this isn't ideal|
 \*****************************************************************************/
 using System.Collections;
@@ -9,7 +9,7 @@ using Cinemachine;
 
 public class CameraConfig {
     [SerializeField]private string name;
-    [SerializeField]CinemachineVirtualCamera camera;
+    [SerializeField]ICinemachineCamera camera;
 
     public string Name() {
         return name;
