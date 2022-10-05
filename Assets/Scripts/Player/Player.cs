@@ -26,9 +26,6 @@ public class Player : MonoBehaviour {
         config.OriginalSpeed(config.MoveSpeed());
     }
     void OnTriggerEnter2D(Collider2D other) {
-        if(groundDetector.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))) {
-            states.IsTouchingGround(true);
-        }
         if(faceCollider.IsTouchingLayers(LayerMask.GetMask(Constants.HazardTag)) || faceCollider.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))) {
             Die();
         }
@@ -37,9 +34,13 @@ public class Player : MonoBehaviour {
             destructable.Break(this.gameObject);
         }
     }
-
-    void OnTriggerExit2D(Collider2D other) {
+    void OnCollisionEnter2D(Collision2D other) {
         if(groundDetector.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))) {
+            states.IsTouchingGround(true);
+        }    
+    }
+    private void OnCollisionExit2D(Collision2D other) {
+        if(!groundDetector.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))) {
             states.IsTouchingGround(false);
         }
     }
@@ -53,7 +54,7 @@ public class Player : MonoBehaviour {
     }
 
     private void FastFall(){
-        if(states.IsTouchingGround) {
+        if(states.IsTouchingGround()) {
             return;
         }
         myRB.velocity = new Vector2(myRB.velocity.x, -config.FastFallSpeed());
@@ -63,24 +64,29 @@ public class Player : MonoBehaviour {
     }
 
     private void Boost() {
-    if(!states.IsAlive() || config.BoostCount() < 1 || states.IsBoosting()) {
-        return;
-    }
-        states.IsBoosting(true);
-        audioManager.Play("Boost");
-        config.MoveSpeed(config.BoostSpeed());
-        config.BoostCount(-1);
-        gameManager.DisableBoostIndicator(config.BoostCount() - 1);
-        if(tutorial != null) {
-            tutorial.SetCompletion(TutorialStates.BoostComplete);
+        if(!states.IsAlive() || config.BoostCount() < 1 || states.IsBoosting()) {
+            return;
         }
-        Thread.Sleep((int)(config.BoostDuration() * 1000));
+            states.IsBoosting(true);
+            audioManager.Play("Boost");
+            Debug.Log("Boost Speed = " + config.BoostSpeed());
+            config.MoveSpeed(config.BoostSpeed());
+            config.BoostCount(-1);
+            gameManager.DisableBoostIndicator(config.BoostCount());
+            StartCoroutine(EndBoost());
+    }
+    IEnumerator EndBoost() {
+        yield return new WaitForSecondsRealtime(config.BoostCooldown());
+        Thread.Sleep((int)(config.BoostDuration() * 100));
         config.MoveSpeed(config.OriginalSpeed());
-        //while(transform.position.x > 0) {
-//
-        //}
+        Debug.Log("Move Speed = " + config.MoveSpeed());
         states.IsBoosting(false);
-  }
+        StartCoroutine(ReplenishBoost());
+    }
+    IEnumerator ReplenishBoost() {
+        yield return new WaitForSecondsRealtime(config.BoostCooldown());
+        config.BoostCount(config.BoostCount() + 1);
+    }
 
     public void ManageInput(InputData input) {
     switch (input.action) {
@@ -103,12 +109,11 @@ public class Player : MonoBehaviour {
         else {
             myRB.gravityScale = gameManager.ReturnMinGravity();
         }
-        
-        if(states.IsBoosting() || (transform.position.x < .1 && transform.position.x > -.1)) {
+        if(!(transform.position.x < .1 && transform.position.x > -.1) || states.IsBoosting()) {
             if(transform.position.x < 0 || states.IsBoosting()) {
                 myRB.velocity = new Vector2(config.MoveSpeed(), myRB.velocity.y);
             }
-            else if(transform.position.x > 0 && !states.IsBoosting()) {
+            else if(transform.position.x > 0) {
                 myRB.velocity = new Vector2(-config.MoveSpeed(), myRB.velocity.y);
             }
         }
@@ -131,13 +136,5 @@ public class Player : MonoBehaviour {
             respawnPlatform.SetActive(true);
         }
         states.CanMove(false);
-    }
-
-    IEnumerable BoostCooldown() {
-        if(config.BoostCount() >= config.BoostLimit()) {
-            yield break;
-        }
-        yield return new WaitForSecondsRealtime(config.BoostCooldown());
-        config.BoostCount(1);
     }
 }

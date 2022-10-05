@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 2008157518380698527}
   - component: {fileID: 2008157518380698517}
   - component: {fileID: 2008157518380698516}
-  - component: {fileID: 4384500516886471939}
   - component: {fileID: 6770808484587875307}
   m_Layer: 10
   m_Name: Orange
@@ -36,8 +35,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 8435369076099740365}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -82,19 +80,20 @@ MonoBehaviour:
   gameManager: {fileID: 584108584079547597, guid: afb664e2e824d024ca58331eea264f9e, type: 3}
   speedController: {fileID: 1040265670807491031, guid: 0f69642871fac7d42b7383f4a7fb489b, type: 3}
   tutorial: {fileID: 1438798649506327079, guid: bc54c55d7eeea5343b35a92e8b57b17c, type: 3}
+  audioManager: {fileID: 0}
   states: {fileID: 2771216790600858490}
   config:
     jumpHeight: 25
     fastFallSpeed: 25
     boostLimit: 3
     boostSpeed: 10
-    boostDuration: 0.5
+    boostDuration: 0.25
     boostCooldown: 1
+    moveSpeed: 5
   afterlife: {fileID: 7596258187281597138, guid: 1ca431b0505d7c6428c63b70bb2591bf, type: 3}
   respawnPoint: {fileID: 7246509966710382280, guid: bdae070a6f686f14faeb98b5071e85c1, type: 3}
   respawnPlatform: {fileID: 5492771457414053233, guid: d0f98abfbb895314ca394b2649c126da, type: 3}
-  myAnimator: {fileID: 4361866629160975246}
-  groundDetector: {fileID: 4384500516886471939}
+  groundDetector: {fileID: 2008157518380698517}
   faceCollider: {fileID: 2008157518380698516}
 --- !u!114 &2771216790600858490
 MonoBehaviour:
@@ -232,32 +231,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16924012, y: 1.1848419}
   m_EdgeRadius: 0
---- !u!61 &4384500516886471939
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008157518380698524}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.33922172, y: -2.8315856}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.375, y: 4.375}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.192409, y: 2.6659913}
-  m_EdgeRadius: 0
 --- !u!95 &6770808484587875307
 Animator:
   serializedVersion: 3
@@ -277,60 +250,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &5389583143203599524
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8435369076099740365}
-  - component: {fileID: 5631584582873934941}
-  m_Layer: 10
-  m_Name: GroundDetector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8435369076099740365
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5389583143203599524}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2008157518380698520}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &5631584582873934941
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5389583143203599524}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.33922172, y: -2.8315856}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.375, y: 4.375}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.192409, y: 2.6659913}
-  m_EdgeRadius: 0

@@ -7,13 +7,6 @@ using State;
 
 public class GameManager : MonoBehaviour {
     [Header("Game Settings")]
-    public GameObject[] situations;
-    [SerializeField]int boostCount = 2;
-    [Range(0, 10)]
-    [SerializeField]float slowSpeed = 2f;
-    [Range(0, 10)]
-    [SerializeField]float fastSpeed = 2f;
-    [SerializeField]float respawnTime = 2f;
     [SerializeField]float gravityMultiplier = .1f;
     [SerializeField]float minGravity = 4f;
     [Header("Interactables")]
@@ -47,8 +40,8 @@ public class GameManager : MonoBehaviour {
             endScreen.gameObject.SetActive(false);
         }
         if(cameraManager != null){
-            cameraManager.SetCamFollow(CameraType.Main);
-            cameraManager.SwitchToMainCam();
+            cameraManager.SetCamFollow("current",player.gameObject.transform);
+            cameraManager.SwitchCam("main");
         }
         DisableBoostAllIndicators();
     }
@@ -72,9 +65,6 @@ public class GameManager : MonoBehaviour {
     public void QuitGame(){
         StartCoroutine(ReloadLevel(0));
     }
-    public GameObject GetRandomSituation(){
-        return situations[Random.Range(0,situations.Length)];
-    }
     void DisableBoostAllIndicators(){
         if(boostIndicator[0] == null){
             return;
@@ -92,6 +82,7 @@ public class GameManager : MonoBehaviour {
         }
     }
     public void DisableBoostIndicator(int index){
+        Debug.Log(index);
         boostIndicator[index].gameObject.SetActive(false);
     }
     public void ShowEndScreen(bool active){
@@ -167,19 +158,6 @@ public class GameManager : MonoBehaviour {
     public GameObject ReturnGroundParent(){
         return groundParent;
     }
-
-    public float ReturnSlowSpeed(){
-        return slowSpeed;
-    }
-
-    public float ReturnFastSpeed(){
-        return fastSpeed;
-    }
-
-    public float ReturnRespawnTime(){
-        return respawnTime;
-    }
-
      public float ReturnMinGravity(){
         return minGravity;
     }
@@ -192,13 +170,13 @@ public class GameManager : MonoBehaviour {
 
     public void PlayerDeath(bool val) {
         if(val == true) {
-            cameraManager.SwitchToDeadCam();
+            cameraManager.SwitchCam("dead");
             audioManager.Pause("Music");
             audioManager.Play("Die");
             ShowEndScreen(true); 
         }
         else {
-            cameraManager.SwitchToMainCam();
+            cameraManager.SwitchCam("main");
             audioManager.Play("Music");
             ShowEndScreen(false);
         }
