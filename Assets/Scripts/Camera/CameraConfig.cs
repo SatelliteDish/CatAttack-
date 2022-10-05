@@ -1,3 +1,7 @@
+/*****************************************************************************\
+|This class wraps a Cinemachine Virtual Camera                                |
+|TODO: Change the name, Camera was taken (unsurprisingly) and this isn't ideal|
+\*****************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

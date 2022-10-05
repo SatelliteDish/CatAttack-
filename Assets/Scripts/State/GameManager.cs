@@ -1,3 +1,6 @@
+using System.Diagnostics;
+using Internal;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,8 +43,13 @@ public class GameManager : MonoBehaviour {
             endScreen.gameObject.SetActive(false);
         }
         if(cameraManager != null){
-            cameraManager.SetCamFollow("current",player.gameObject.transform);
-            cameraManager.SwitchCam("main");
+            try {
+                cameraManager.SetCamFollow("current",player.gameObject.transform);
+                cameraManager.SwitchCam("main");
+            }
+            catch(ArgumentException error){
+                Debug.LogError(error.Message);
+            }
         }
         DisableBoostAllIndicators();
     }
@@ -82,7 +90,10 @@ public class GameManager : MonoBehaviour {
         }
     }
     public void DisableBoostIndicator(int index){
-        Debug.Log(index);
+        if(index < 0 || index > boostIndicator.Length) {
+            Debug.Log("Incorrect indicator disabled! Attempted to disable " + index);
+            return;
+        }
         boostIndicator[index].gameObject.SetActive(false);
     }
     public void ShowEndScreen(bool active){
@@ -170,15 +181,25 @@ public class GameManager : MonoBehaviour {
 
     public void PlayerDeath(bool val) {
         if(val == true) {
-            cameraManager.SwitchCam("dead");
-            audioManager.Pause("Music");
-            audioManager.Play("Die");
-            ShowEndScreen(true); 
+            try {
+                cameraManager.SwitchCam("dead");
+                audioManager.Pause("Music");
+                audioManager.Play("Die");
+                ShowEndScreen(true); 
+            }
+            catch(ArgumentException error) {
+                Debug.Debug.LogError(error.Message);
+            }
         }
         else {
-            cameraManager.SwitchCam("main");
-            audioManager.Play("Music");
-            ShowEndScreen(false);
+            try {
+                cameraManager.SwitchCam("main");
+                audioManager.Play("Music");
+                ShowEndScreen(false);
+            }
+            catch(ArgumentException error) {
+                Debug.LogError(error.Message);
+            }
         }
     }
 }

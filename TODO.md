@@ -33,7 +33,7 @@
         </li>
         <li>BGManager.cs
             <ul>
-                <li>🟩🟢Turn into BackgroundFactory that my background point talks abouut. I should make an actual background factory to handle the creation logic, and only let it be accessible by BGManager (or whatever I rename it). I'll need a queue, a BackgroundFactory class, and a public BGStart and BGStop function that changes the speed of all BG objects, for when the player dies.</li>
+                <li>🟩🟢Turn into BackgroundFactory that my background point talks about. I should make an actual background factory to handle the creation logic, and only let it be accessible by BGManager (or whatever I rename it). I'll need a queue, a BackgroundFactory class, and a public BGStart and BGStop function that changes the speed of all BG objects, for when the player dies.</li>
             </ul>
         </li>
         <li>🟦🟡BackgroundFactory.cs: Add a factory for the BackDrops.
@@ -53,23 +53,12 @@
                 <li>IObservable: Add to SpeedController and maybe more</li>
             </ul>
         </li>
-        <li>CameraManager.cs
-            <ul>
-                <li>🟩🟢Abstract the set follow method to be able to follow any gameObject passed in</li>
-                <li>🟨🟢Create a namespace, so theres no longer the global enum</li>
-            </ul>
-        </li>
         <li>SpeedController.cs
             <ul>
                 <li>🟩🟢Take some unnecessary stuff out of Update()</li>
             </ul>
         </li>
         <li>🟩🟢Get rid of unnecessary namespaces</li>
-        <li>AnimationManager.cs
-            <ul>
-                <li>🟨🟡Actually impliment this.</li>
-            </ul>
-        </li>
         <li>ControlManager.cs
             <ul>
                 <li>🟢🟩Actually understand this. I implimented it before I was really able to understand what I was writing, so I should go back and figure it out so I can maybe improve it.</li>
@@ -79,7 +68,6 @@
         <li>🟥🔴Player.cs in progress
             <ul>
                 <li>Create a PlayerFactory, a little overkill right now but when I reimpliment cosmetics it will be a huge help. Can also use to inform the player where they are ie. in tutorial</li>
-                <li>Fix Boost(), might need to break into multiple methods</li>
             </ul>
         </li>
         <li>Assets/Save
@@ -98,7 +86,6 @@
             <ul>
                 <li>🟨🟡Needs to be broken up and have a lot of unnecessary stuff removed. I'll create an in depth list shortly
                     <ul>
-                        <li>Remove all methods and variables that don't get referenced</li>
                         <li>Remove all control it has over UI, break that out</li>
                         <li>Make a scene navigator, who only deals with scene management.</li>
                         <li>Break out control of Canvases.</li>
@@ -128,6 +115,8 @@
         <li>🟨🟢RespawnPlatform.cs can have IObservable be removed, I think</li>
         <li>🟨🟢Target.cs can use some major refactoring. Will add a list to detail exactly what I mean.</li>
         <li>🟩🟢Treats.cs is needlessly complicated, just simplify it</li>
+        <li>🟦🟢Make an exceptions folder, where I can write custom exceptions.</li>
+        <li>CameraManager.cs put the start function somewhere else</li>
     </ul>
 </section>
 
