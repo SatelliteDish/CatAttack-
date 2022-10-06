@@ -2,15 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStates : MonoBehaviour {
-    Player player;
+public class PlayerStates{
     bool isBoosting = false;
     bool isAlive = true;
     bool canMove = true;
     bool isRespawning = false;
     bool isClothed = false;
     bool hasRespawned = false;
-    bool isInTutorial = false;
     bool isTouchingGround = false;
 
 /*************************************************************/
@@ -47,15 +45,6 @@ public class PlayerStates : MonoBehaviour {
     public void IsRespawning (bool state) {
         isRespawning = state;
     }
-
-/*************************************************************/
-    public bool IsClothed() {
-        return isClothed;
-    }
-
-    public void IsClothed (bool state) {
-        isClothed = state;
-    }
 /*************************************************************/
     public bool HasRespawned() {
         return hasRespawned;
@@ -64,14 +53,7 @@ public class PlayerStates : MonoBehaviour {
     public void HasRespawned (bool state) {
         hasRespawned = state;
     }
-/*************************************************************/
-    public bool IsInTutorial() {
-        return isInTutorial;
-    }
 
-    public void IsInTutorial (bool state) {
-        isInTutorial = state;
-    }
 /*************************************************************/
     public bool IsTouchingGround() {
         return isTouchingGround;
@@ -79,11 +61,5 @@ public class PlayerStates : MonoBehaviour {
 
     public void IsTouchingGround(bool val) {
         isTouchingGround = val;
-    }
-/*************************************************************/
-/*************************************************************/
-/*************************************************************/
-    private void Start() {
-        player = gameObject.GetComponent<Player>();
     }
 }

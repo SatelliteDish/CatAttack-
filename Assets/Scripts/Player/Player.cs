@@ -6,51 +6,42 @@ using Tutorial;
 using InputManagement;
 
 public class Player : MonoBehaviour {
+    public PlayerStates states;
+    public PlayerConfig config;
     Rigidbody2D myRB;
     AnimationManager myAnimator;
     [SerializeField]GameManager gameManager;
     [SerializeField]SpeedController speedController;
-    [SerializeField]TutorialScreen tutorial;
     [SerializeField]AudioManager audioManager;
-    public PlayerStates states;
-    public PlayerConfig config;
     [SerializeField]GameObject afterlife;
     [SerializeField]GameObject respawnPoint;
     [SerializeField]GameObject respawnPlatform;
     [SerializeField]BoxCollider2D groundDetector;
     [SerializeField]BoxCollider2D faceCollider;
-    void Start() {
-        myRB = GetComponent<Rigidbody2D>();
-        myAnimator = GetComponent<AnimationManager>();
-        audioManager = FindObjectOfType<AudioManager>();
-        config.OriginalSpeed(config.MoveSpeed());
+    public void Initialize(AudioManager audio, GameManager _gameManager) {
+        audioManager = audio;
+        gameManager = _gameManager;
     }
-    void OnTriggerEnter2D(Collider2D other) {
-        if(faceCollider.IsTouchingLayers(LayerMask.GetMask(Constants.HazardTag)) || faceCollider.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))) {
-            Die();
-        }
-        if(typeof(IDestructable).IsAssignableFrom(other.gameObject.GetType())) {
-            IDestructable destructable = other.gameObject.GetComponent<IDestructable>();
-            destructable.Break(this.gameObject);
-        }
-    }
-    void OnCollisionEnter2D(Collision2D other) {
-        if(groundDetector.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))) {
-            states.IsTouchingGround(true);
-        }    
-    }
-    private void OnCollisionExit2D(Collision2D other) {
-        if(!groundDetector.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))) {
-            states.IsTouchingGround(false);
+    public void ManageInput(InputData input) {
+    switch (input.action) {
+        case ActionType.Jump:
+            Jump();
+            break;
+        case ActionType.Fall:
+            FastFall();
+            break;   
+        case ActionType.Boost:
+            Boost();
+            break;
         }
     }
-
     private void Jump(){
         if(!states.IsAlive() || !states.IsTouchingGround()){
             return;
         }
         myAnimator.IsJumping(true);
-        myRB.velocity = new Vector2 (myRB.velocity.x, config.JumpHeight());
+        Vector2 jump = new Vector2(myRB.velocity.x,config.JumpHeight());
+        myRB.velocity = jump;
     }
 
     private void FastFall(){
@@ -58,9 +49,6 @@ public class Player : MonoBehaviour {
             return;
         }
         myRB.velocity = new Vector2(myRB.velocity.x, -config.FastFallSpeed());
-        if(states.IsInTutorial()){
-            tutorial.SetCompletion((TutorialStates.FallComplete));
-        }
     }
 
     private void Boost() {
@@ -92,38 +80,7 @@ public class Player : MonoBehaviour {
         yield return new WaitForSecondsRealtime(config.BoostCooldown());
         config.BoostCount(config.BoostCount() + 1);
     }
-
-    public void ManageInput(InputData input) {
-    switch (input.action) {
-        case ActionType.Jump:
-            Jump();
-            break;
-        case ActionType.Boost:
-            Boost();
-            break;
-        case ActionType.Fall:
-            FastFall();
-            break;   
-        }
-    }
-
-    void Update() {
-        if(speedController.ReturnGroundSpeed().x < 0 && myRB.gravityScale > gameManager.ReturnMinGravity()) {
-            myRB.gravityScale = (-speedController.ReturnGroundSpeed().x/speedController.ReturnMinSpeed())* gameManager.ReturnGravityMultiplier();
-        }
-        else {
-            myRB.gravityScale = gameManager.ReturnMinGravity();
-        }
-        if(!(transform.position.x < .1 && transform.position.x > -.1) || states.IsBoosting()) {
-            if(transform.position.x < 0 || states.IsBoosting()) {
-                myRB.velocity = new Vector2(config.MoveSpeed(), myRB.velocity.y);
-            }
-            else if(transform.position.x > 0) {
-                myRB.velocity = new Vector2(-config.MoveSpeed(), myRB.velocity.y);
-            }
-        }
-    }
-    public void Die() {
+    void Die() {
         states.IsAlive(false);
         gameManager.PlayerDeath(true);
         transform.position = afterlife.transform.position;
@@ -141,5 +98,46 @@ public class Player : MonoBehaviour {
             respawnPlatform.SetActive(true);
         }
         states.CanMove(false);
+    }
+
+    void Start() {
+        myRB = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<AnimationManager>();
+        config.OriginalSpeed(config.MoveSpeed());
+    }
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(groundDetector.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))) {
+            states.IsTouchingGround(true);
+        }   
+        if(faceCollider.IsTouchingLayers(LayerMask.GetMask(Constants.HazardTag)) || faceCollider.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))) {
+            Die();
+        }
+        if(typeof(IDestructable).IsAssignableFrom(other.gameObject.GetType())) {
+            IDestructable destructable = other.gameObject.GetComponent<IDestructable>();
+            destructable.Break(this.gameObject);
+        } 
+    }
+    private void OnCollisionExit2D(Collision2D other) {
+        if(!groundDetector.IsTouchingLayers(LayerMask.GetMask(Constants.GroundTag))) {
+            states.IsTouchingGround(false);
+        }
+    }
+
+
+    void Update() {
+        if(speedController.ReturnGroundSpeed().x < 0 && myRB.gravityScale > gameManager.ReturnMinGravity()) {
+            myRB.gravityScale = (-speedController.ReturnGroundSpeed().x/speedController.ReturnMinSpeed())* gameManager.ReturnGravityMultiplier();
+        }
+        else {
+            myRB.gravityScale = gameManager.ReturnMinGravity();
+        }
+        if(!(transform.position.x < .1 && transform.position.x > -.1) || states.IsBoosting()) {
+            if(transform.position.x < 0 || states.IsBoosting()) {
+                myRB.velocity = new Vector2(config.MoveSpeed(), myRB.velocity.y);
+            }
+            else if(transform.position.x > 0) {
+                myRB.velocity = new Vector2(-config.MoveSpeed(), myRB.velocity.y);
+            }
+        }
     }
 }

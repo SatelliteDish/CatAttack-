@@ -12,14 +12,12 @@ public class SpeedController : MonoBehaviour {
     [SerializeField]float groundSpeedPercent;
     [Range(0,10)]
     [SerializeField]float timeMultiplier;
-    GameManager gameManager;
     StateController stateController;
     void Start() {
         SetReferences();
     }
     void SetReferences() {
         ManagersRepo managersRepo = FindObjectOfType<DependencyManager>().GetManagersRepo();
-        gameManager = managersRepo.GetGameManager();
         stateController = managersRepo.GetStateController();
     }
     void Update() {
