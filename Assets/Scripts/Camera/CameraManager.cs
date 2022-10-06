@@ -6,7 +6,6 @@
 \****************************************************************/
 
 using System;
-using System.Diagnostics;
 using UnityEngine;
 public class CameraManager : MonoBehaviour {
     [SerializeField]CameraConfig[] cameras;

@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,7 +18,6 @@ public class Coins : MonoBehaviour, IDestructable {
         ManagersRepo managersRepo = dependencyManager.GetManagersRepo();
         gameManager = managersRepo.GetGameManager();
         audioManager = managersRepo.GetAudioManager();
-        myRigidbody = GetComponent<Rigidbody2D>();
     }
     void IDestructable.Break(GameObject destroyer) {
         if(isCollected) {

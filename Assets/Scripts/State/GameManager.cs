@@ -1,5 +1,3 @@
-using System.Diagnostics;
-using Internal;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -185,7 +183,7 @@ public class GameManager : MonoBehaviour {
                 ShowEndScreen(true); 
             }
             catch(ArgumentException error) {
-                Debug.Debug.LogError(error.Message);
+                Debug.LogError(error.Message);
             }
         }
         else {

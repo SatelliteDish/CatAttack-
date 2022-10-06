@@ -1,12 +1,9 @@
-using System.Numerics;
 /********************************************************************************\
 |This can be attatched to anything with RigidBody2D                              |
 |Initialize on instantiation                                                     |
 |Doesn't move by default, needs to be told to                                    |
 |Controls the movement of the object this is attatched to, full range of movement|
 \********************************************************************************/
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ground : MonoBehaviour {

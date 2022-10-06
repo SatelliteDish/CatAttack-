@@ -35,7 +35,7 @@ public class Target : MonoBehaviour, IDestructable {
         speed = val;
     }
 
-    public void IDestructable.Break() {
+    void IDestructable.Break(GameObject obj) {
         if(isBroken){
             return;
         }
