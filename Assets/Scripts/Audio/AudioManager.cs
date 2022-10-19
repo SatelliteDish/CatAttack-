@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Audio;
 using System;
@@ -22,18 +21,18 @@ public class AudioManager : MonoBehaviour
             PlayerPrefs.SetFloat("BGMVolume", 1f);
         }
         foreach (Sound s in sounds) {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.Clip();
-            s.source.pitch = s.Pitch();
-            s.source.loop = s.loop;
-            if(s.isBGM) {
-                s.source.volume = PlayerPrefs.GetFloat("BGMVolume")/ 10;
+            s.Source(gameObject.AddComponent<AudioSource>());
+            s.Source().clip = s.Clip();
+            s.Source().pitch = s.Pitch();
+            s.Source().loop = s.Loop();
+            if(s.IsBGM()) {
+                s.Source().volume = PlayerPrefs.GetFloat("BGMVolume")/ 10;
             }
-            if(s.isSFX) {
-                s.source.volume = PlayerPrefs.GetFloat("SFXVolume")/ 10;
+            if(s.IsSfx()) {
+                s.Source().volume = PlayerPrefs.GetFloat("SFXVolume")/ 10;
             }
-            if(!s.isBGM && !s.isSFX) {
-            s.source.volume = .75f; 
+            if(!s.IsBGM() && !s.IsSfx()) {
+            s.Source().volume = .75f; 
             }
         }
     }
@@ -48,38 +47,38 @@ public class AudioManager : MonoBehaviour
     }
     public void UpdateVolumeLevels() {
         foreach(Sound s in sounds){
-            if(s.isBGM) {
-                s.source.volume = PlayerPrefs.GetFloat("BGMVolume")/ 10;
+            if(s.IsBGM()) {
+                s.Source().volume = PlayerPrefs.GetFloat("BGMVolume")/ 10;
             }
-            if(s.isSFX) {
-                s.source.volume = PlayerPrefs.GetFloat("SFXVolume")/ 10;
+            if(s.IsSfx()) {
+                s.Source().volume = PlayerPrefs.GetFloat("SFXVolume")/ 10;
             }
-            if(!s.isBGM && !s.isSFX) {
-                s.source.volume = .75f; 
+            if(!s.IsBGM() && !s.IsSfx()) {
+                s.Source().volume = .75f; 
             }
         }
     }
     public void Play(string name) {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(sounds, sound => sound.Name() == name);
         if(s == null) {
             SoundNotFound(name);
         }
-        s.source.Play();
+        s.Source().Play();
     }
     public void Stop(string name) {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(sounds, sound => sound.Name() == name);
         if(s == null) {
             SoundNotFound(name);
         }
-        s.source.Stop();
+        s.Source().Stop();
         }
         
     public void Pause(string name) {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(sounds, sound => sound.Name() == name);
         if(s == null) {
             SoundNotFound(name);
         }
-        s.source.Pause();
+        s.Source().Pause();
     }
     private void SoundNotFound(string name) {
             throw new ArgumentException(String.Format("Sound name {0} not found!",name));

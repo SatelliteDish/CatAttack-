@@ -25,4 +25,19 @@ public class Sound {
     public float Pitch() {
         return pitch;
     }
+    public bool Loop() {
+        return loop;
+    }
+    public bool IsSfx() {
+        return isSFX;
+    }
+    public bool IsBGM() {
+        return isBGM;
+    }
+    public AudioSource Source() {
+        return source;
+    }
+    public void Source(AudioSource _source) {
+        source = _source;
+    }
 }

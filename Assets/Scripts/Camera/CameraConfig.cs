@@ -2,22 +2,20 @@
 |This class wraps a Cinemachine Camera                                        |
 |TODO: Change the name, Camera was taken (unsurprisingly) and this isn't ideal|
 \*****************************************************************************/
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class CameraConfig {
-    [SerializeField]private string name;
-    [SerializeField]ICinemachineCamera camera;
+public class CameraConfig: MonoBehaviour {
+    [SerializeField]private string _name;
+    [SerializeField]CinemachineVirtualCamera _camera;
 
     public string Name() {
-        return name;
+        return _name;
     }
     public void SetFollow(Transform transform) {
-        camera.Follow = transform;
+        _camera.Follow = transform;
     }
     public void SetActive(bool val) {
-        this.SetActive(val);
+        _camera.enabled = !_camera.enabled ;
     }
 }
