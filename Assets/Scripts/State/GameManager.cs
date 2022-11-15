@@ -8,9 +8,12 @@ using State;
 
 public class GameManager : MonoBehaviour {
     [Header("Game Settings")]
+    //TODO: Break this into it's some kind of gravity controller, or something
     [SerializeField]float gravityMultiplier = .1f;
     [SerializeField]float minGravity = 4f;
+    //END OF TODO
     [Header("Interactables")]
+    //TODO: Take this out and move it somewhere else
     [SerializeField]float[] odds;
     [SerializeField]int[] pointValue;
     [Header("Spawn Locations")]
